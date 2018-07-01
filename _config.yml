@@ -3,19 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: phantom9999的博客
 subtitle:
 description:
 keywords:
-author: John Doe
-language:
+author: phantom9999
+language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://phantom9999.github.io/
 root: /
-permalink: :year/:month/:day/:title/
+permalink: :year-:month-:day/:title/
 permalink_defaults:
 
 # Directory
@@ -81,3 +81,14 @@ deploy:
   type: git
   repo: git@github.com:phantom9999/phantom9999.github.io.git
   branch: master
+
+
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess 
+  theme: 'default'
+  line_number: false    # default false 
+
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
