@@ -20,11 +20,11 @@ install:
 - npm install
 script:
 - pwd
-- hexo clean
-- hexo g
+- ./node_modules/hexo/bin/hexo clean
+- ./node_modules/hexo/bin/hexo g
 
 after_success:
-- hexo deploy
+- ./node_modules/hexo/bin/hexo deploy
 
 
 
