@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-- '4'
+node_js: stable
 branches:
   only:
   - blog_source
@@ -21,6 +20,7 @@ install:
 - npm install
 script:
 - pwd
+- find -name hexo
 - hexo clean
 - hexo g
 
