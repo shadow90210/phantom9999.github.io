@@ -6,7 +6,7 @@ branches:
   - blog_source
 cache:
   directories:
-  - node_modules
+          #  - node_modules
 before_install:
 - openssl aes-256-cbc -K $encrypted_9095989a948f_key -iv $encrypted_9095989a948f_iv
   -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
