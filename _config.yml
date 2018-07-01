@@ -79,8 +79,9 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:phantom9999/phantom9999.github.io.git
-  branch: master
+  repo:
+    github: git@github.com:phantom9999/phantom9999.github.io.git,master
+    coding: git@git.coding.net:phantom9999/phantom9999.git,master
 
 
 prism_plugin:
