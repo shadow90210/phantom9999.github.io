@@ -164,7 +164,7 @@ toc:
   number: true
 
   # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
+  wrap: true
 
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
@@ -191,13 +191,13 @@ sidebar:
   offset: 12
 
   # Back to top in sidebar (only for Pisces | Gemini).
-  b2t: false
+  b2t: true
 
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
-  onmobile: false
+  onmobile: true
 
 
 # ---------------------------------------------------------------
@@ -675,7 +675,7 @@ motion:
 fancybox: true
 
 # Progress bar in the top during page loading.
-pace: false
+pace: true
 # Themes list:
 #pace-theme-big-counter
 #pace-theme-bounce
@@ -728,28 +728,28 @@ vendors:
   _internal: lib
 
   # Internal version: 2.1.3
-  jquery:
+  jquery: //apps.bdimg.com/libs/jquery/2.1.3/jquery.min.js
 
   # Internal version: 2.1.5
   # See: http://fancyapps.com/fancybox/
-  fancybox:
-  fancybox_css:
+  fancybox: //apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.min.js
+  fancybox_css: //apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.min.css
 
   # Internal version: 1.0.6
   # See: https://github.com/ftlabs/fastclick
-  fastclick:
+  fastclick: //apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js
 
   # Internal version: 1.9.7
   # See: https://github.com/tuupola/jquery_lazyload
-  lazyload:
+  lazyload: //apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js
 
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
-  velocity:
+  velocity: //cdn.bootcss.com/velocity/1.2.1/velocity.min.js
 
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
-  velocity_ui:
+  velocity_ui: //cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js
 
   # Internal version: 0.7.9
   # See: https://faisalman.github.io/ua-parser-js/
@@ -757,20 +757,20 @@ vendors:
 
   # Internal version: 4.6.2
   # See: http://fontawesome.io/
-  fontawesome:
+  fontawesome: //apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css
 
   # Internal version: 1
   # https://www.algolia.com
-  algolia_instant_js:
-  algolia_instant_css:
+  algolia_instant_js: //cdn.bootcss.com/instantsearch.js/1.0.0/instantsearch.min.js
+  algolia_instant_css: //cdn.bootcss.com/instantsearch.js/1.0.0/instantsearch.min.css
 
   # Internal version: 1.0.2
   # See: https://github.com/HubSpot/pace
   # Or use direct links below:
   # pace: //cdn.bootcss.com/pace/1.0.2/pace.min.js
   # pace_css: //cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css
-  pace:
-  pace_css:
+  pace: //cdn.bootcss.com/pace/1.0.2/pace.min.js
+  pace_css: //cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css
 
   # Internal version: 1.0.0
   # https://github.com/hustcc/canvas-nest.js
@@ -811,3 +811,6 @@ images: images
 
 # Theme version
 version: 5.1.4
+
+
+
