@@ -1,3 +1,8 @@
+---
+title: 01-从SAPI接口开始
+tags: php
+---
+
 # 01-从SAPI接口开始
 SAPI:Server Application Programming Interface 服务器端应用编程端口。研究过PHP架构的同学应该知道这个东东的重要性，它提供了一个接口，使得PHP可以和其他应用进行交互数据。 本文不会详细介绍每个PHP的SAPI，只是针对最简单的CGI SAPI，来说明SAPI的机制。
 
