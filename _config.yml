@@ -8,7 +8,7 @@ subtitle:
 description:
 keywords:
 author: phantom9999
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -74,7 +74,8 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 #theme: landscape
-theme: next
+#theme: next
+theme: next-reloaded
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -110,6 +111,10 @@ baidusitemap:
 #    height: 60
 #  mobile:
 #    show: false
+
+live2d:
+  model: haruto
+
 
 
 search:
