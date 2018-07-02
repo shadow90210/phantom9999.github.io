@@ -19,10 +19,8 @@ install:
 - npm install hexo-cli -g
 - npm install
 script:
-- pwd
-- find -name hexo
-- hexo clean
-- hexo g
+#- hexo clean
+- hexo g --debug
 
 after_success:
 - hexo deploy
