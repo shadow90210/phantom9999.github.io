@@ -120,10 +120,17 @@ live2d:
 search:
   path: search.xml
 
+all_minifier: true
+
+js_concator:
+  enable: false
+  bundle_path: '/js/bundle.js'
+  front: false
+  silent: false
+
 html_minifier:
   enable: true
   ignore_error: false
-  exclude:
 
 css_minifier:
   enable: true
@@ -133,8 +140,6 @@ css_minifier:
 js_minifier:
   enable: true
   mangle: true
-  output:
-  compress:
   exclude:
     - '*.min.js'
 
@@ -145,3 +150,8 @@ image_minifier:
   optimizationLevel: 2
   pngquant: false
   progressive: false
+
+flowchart:
+  # raphael:   # optional, the source url of raphael.js
+  # flowchart: # optional, the source url of flowchart.js
+  options: # options used for `drawSVG`
