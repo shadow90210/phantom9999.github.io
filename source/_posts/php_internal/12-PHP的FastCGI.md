@@ -1,3 +1,9 @@
+---
+title: 12-PHP的FastCGI
+tags: php_internal
+categories: php
+---
+
 # 12-PHP的FastCGI
 CGI全称是“通用网关接口”(Common Gateway Interface)， 它可以让一个客户端，从网页浏览器向执行在Web服务器上的程序请求数据。 CGI描述了客户端和这个程序之间传输数据的一种标准。 CGI的一个目的是要独立于任何语言的，所以CGI可以用任何一种语言编写，只要这种语言具有标准输入、输出和环境变量。 如php，perl，tcl等。
 
@@ -22,7 +28,7 @@ PHP的CGI实现了Fastcgi协议，是一个TCP或UDP协议的服务器接受来�
 4. 服务器进程调用accept函数进入阻塞状态，直到有客户进程调用connect函数而建立起一个连接；
 5. 当与客户端创建连接后，服务器调用read_stream函数读取客户的请求；
 6. 处理完数据后，服务器调用write函数向客户端发送应答。
-    
+
 <center>
 ![](images/2012_02_07_01.jpg)
 </center>

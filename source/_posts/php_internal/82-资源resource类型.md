@@ -1,3 +1,9 @@
+---
+title: 82-资源resource类型
+tags: php_internal
+categories: php
+---
+
 # 82-资源resource类型
 讲述之前，先描述下{资源}类型在内核中的结构：
 
@@ -134,7 +140,7 @@ unset($fp)执行后，内核会自动的调用php_sample_descriptor_dtor函数�
     	/* Use the zval* to verify the resource type and
     	 * retrieve its pointer from the lookup table */
     	ZEND_FETCH_RESOURCE(fp,FILE*,&file_resource,-1,PHP_SAMPLE_DESCRIPTOR_RES_NAME,le_sample_descriptor);
-    	
+
     	/* Write the data, and
     	 * return the number of bytes which were
     	 * successfully written to the file */
@@ -199,13 +205,13 @@ zend_fetch_resource()是对zend_hash_find()的一层封装，它使用一个数�
         if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r",&file_resource) == FAILURE ) {
             RETURN_NULL();
         }
-        
+
         /* While it's not necessary to actually fetch the
          * FILE* resource, performing the fetch provides
          * an opportunity to verify that we are closing
          * the correct resource type. */
         ZEND_FETCH_RESOURCE(fp, FILE*, &file_resource, -1,PHP_SAMPLE_DESCRIPTOR_RES_NAME, le_sample_descriptor);
-        
+
         /* Force the resource into self-destruct mode */
         zend_hash_index_del(&EG(regular_list),Z_RESVAL_P(file_resource));
         RETURN_TRUE;

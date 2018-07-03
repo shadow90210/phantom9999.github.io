@@ -1,3 +1,9 @@
+---
+title: 41-全局变量Global
+tags: php_internal
+categories: php
+---
+
 # 41-全局变量Global
 global语句的作用是定义全局变量，例如如果想在函数内访问全局作用域内的变量则可以通过global声明来定义。 下面从语法解释开始分析。
 ## 1. 词法解析
@@ -13,7 +19,7 @@ global语句的作用是定义全局变量，例如如果想在函数内访问�
 在词法解析完后，获得了token，此时通过这个token，我们去Zend/zend_language_parser.y文件中查找。找到相关代码如下：
 
     |   T_GLOBAL global_var_list ';'
-     
+
     global_var_list:
         global_var_list ',' global_var  { zend_do_fetch_global_variable(&$3, NULL, ZEND_FETCH_GLOBAL_LOCK TSRMLS_CC); }
     |   global_var                      { zend_do_fetch_global_variable(&$1, NULL, ZEND_FETCH_GLOBAL_LOCK TSRMLS_CC); }
@@ -23,7 +29,7 @@ global语句的作用是定义全局变量，例如如果想在函数内访问�
 
 从上面的代码可以知道，对于全局变量的声明调用的是zend_do_fetch_global_variable函数，查找此函数的实现在Zend/zend_compile.c文件。
 
-    void zend_do_fetch_global_variable(znode *varname, const znode *static_assignment, int fetch_type TSRMLS_DC) 
+    void zend_do_fetch_global_variable(znode *varname, const znode *static_assignment, int fetch_type TSRMLS_DC)
     {
             ...//省略
             opline->opcode = ZEND_FETCH_W;      /* the default mode must be Write, since fetch_simple_variable() is used to define function arguments */
@@ -34,10 +40,10 @@ global语句的作用是定义全局变量，例如如果想在函数内访问�
             SET_UNUSED(opline->op2);
             opline->op2.u.EA.type = fetch_type;
             result = opline->result;
-     
+
             ... // 省略
             fetch_simple_variable(&lval, varname, 0 TSRMLS_CC); /* Relies on the fact that the default fetch is BP_VAR_W */
-     
+
             zend_do_assign_ref(NULL, &lval, &result TSRMLS_CC);
             CG(active_op_array)->opcodes[CG(active_op_array)->last-1].result.u.EA.type |= EXT_TYPE_UNUSED;
     }
@@ -48,9 +54,9 @@ global语句的作用是定义全局变量，例如如果想在函数内访问�
     void zend_do_assign_ref(znode *result, const znode *lvar, const znode *rvar TSRMLS_DC) /* {{{ */
     {
             zend_op *opline;
-     
+
            ... //省略
-     
+
             opline = get_next_op(CG(active_op_array) TSRMLS_CC);
             opline->opcode = ZEND_ASSIGN_REF;
            ...//省略

@@ -1,3 +1,9 @@
+---
+title: 50-写时复制COW机制
+tags: php_internal
+categories: php
+---
+
 # 50-写时复制COW机制
 写时复制（Copy-on-Write，也缩写为COW），顾名思义，就是在写入时才真正复制一份内存进行修改。 COW最早应用在*nix系统中对线程与内存使用的优化，后面广泛的被使用在各种编程语言中，如C++的STL等。 在PHP内核中，COW也是主要的内存优化手段。 在前面关于变量和内存的讨论中，引用计数对变量的销毁与回收中起着至关重要的标识作用。 引用计数存在的意义，就是为了使得COW可以正常运作，从而实现对内存的优化使用。
 ## 写时复制的作用
@@ -7,21 +13,21 @@
     <?php
     $j = 1;
     var_dump(memory_get_usage());
-     
+
     $tipi = array_fill(0, 100000, 'php-internal');
     var_dump(memory_get_usage());
-     
+
     $tipi_copy = $tipi;
     var_dump(memory_get_usage());
-     
+
     foreach($tipi_copy as $i){
-        $j += count($i); 
+        $j += count($i);
     }
     var_dump(memory_get_usage());
-     
+
     ?>
     //-----执行结果-----
-    $ php t.php 
+    $ php t.php
     int(630904)
     int(10479840)
     int(10479944)
@@ -40,18 +46,18 @@
     $tipi[1] = 'php-internal';
     $tipi[2] = 'php-internal';
     var_dump(memory_get_usage());
-     
+
     $copy = $tipi;
     xdebug_debug_zval('tipi', 'copy');
     var_dump(memory_get_usage());
-     
+
     $copy[0] = 'php-internal';
     xdebug_debug_zval('tipi', 'copy');
     var_dump(memory_get_usage());
-     
+
     ?>
     //-----执行结果-----
-    $ php t.php 
+    $ php t.php
     int(629384)
     tipi: (refcount=2, is_ref=0)=array (0 => (refcount=1, is_ref=0)='php-internal', 1 => (refcount=1, is_ref=0)='php-internal', 2 => (refcount=1, is_ref=0)='php-internal')
     copy: (refcount=2, is_ref=0)=array (0 => (refcount=1, is_ref=0)='php-internal', 1 => (refcount=1, is_ref=0)='php-internal', 2 => (refcount=1, is_ref=0)='php-internal')

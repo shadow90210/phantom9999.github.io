@@ -2,5 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 tags:
-categories:
+categories: essay
+updated: {{ date }}
+comments: false
+keywords:
+description:
 ---

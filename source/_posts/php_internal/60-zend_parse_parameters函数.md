@@ -1,3 +1,9 @@
+---
+title: 60-zend_parse_parameters函数
+tags: php_internal
+categories: php
+---
+
 # 60-zend_parse_parameters函数
 最简单的获取函数调用者传递过来的参数便是使用zend_parse_parameters()函数。
 

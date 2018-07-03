@@ -1,6 +1,7 @@
 ---
 title: 01-从SAPI接口开始
-tags: php
+tags: php_internal
+categories: php
 ---
 
 # 01-从SAPI接口开始
@@ -33,31 +34,31 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
         "cgi",                          /* name */
         "CGI",                          /* pretty name */
     #endif
-     
+
         php_cgi_startup,                /* startup */
         php_module_shutdown_wrapper,    /* shutdown */
-     
+
         NULL,                           /* activate */
         sapi_cgi_deactivate,            /* deactivate */
-     
+
         sapi_cgibin_ub_write,           /* unbuffered write */
         sapi_cgibin_flush,              /* flush */
         NULL,                           /* get uid */
         sapi_cgibin_getenv,             /* getenv */
-     
+
         php_error,                      /* error handler */
-     
+
         NULL,                           /* header handler */
         sapi_cgi_send_headers,          /* send headers handler */
         NULL,                           /* send header handler */
-     
+
         sapi_cgi_read_post,             /* read POST data */
         sapi_cgi_read_cookies,          /* read Cookies */
-     
+
         sapi_cgi_register_variables,    /* register server variables */
         sapi_cgi_log_message,           /* Log message */
         NULL,                           /* Get request time */
-     
+
         STANDARD_SAPI_MODULE_PROPERTIES
     };
 
@@ -101,7 +102,7 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
     #else
         size_t ret;
     #endif
-     
+
     #if PHP_FASTCGI
         if (fcgi_is_fastcgi()) {
             fcgi_request *request = (fcgi_request*) SG(server_context);
@@ -121,13 +122,13 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
         return ret;
     #endif
     }
-     
+
     static int sapi_cgibin_ub_write(const char *str, uint str_length TSRMLS_DC)
     {
         const char *ptr = str;
         uint remaining = str_length;
         size_t ret;
-     
+
         while (remaining > 0) {
             ret = sapi_cgibin_single_write(ptr, remaining TSRMLS_CC);
             if (!ret) {
@@ -137,7 +138,7 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
             ptr += ret;
             remaining -= ret;
         }
-     
+
         return str_length;
     }
 
@@ -177,30 +178,30 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
         char buf[SAPI_CGI_MAX_HEADER_LENGTH];
         sapi_header_struct *h;
         zend_llist_position pos;
-     
+
         if (SG(request_info).no_headers == 1) {
             return  SAPI_HEADER_SENT_SUCCESSFULLY;
         }
-     
+
         if (cgi_nph || SG(sapi_headers).http_response_code != 200)
         {
             int len;
-     
+
             if (rfc2616_headers && SG(sapi_headers).http_status_line) {
                 len = snprintf(buf, SAPI_CGI_MAX_HEADER_LENGTH,
                                "%s\r\n", SG(sapi_headers).http_status_line);
-     
+
                 if (len > SAPI_CGI_MAX_HEADER_LENGTH) {
                     len = SAPI_CGI_MAX_HEADER_LENGTH;
                 }
-     
+
             } else {
                 len = sprintf(buf, "Status: %d\r\n", SG(sapi_headers).http_response_code);
             }
-     
+
             PHPWRITE_H(buf, len);
         }
-     
+
         h = (sapi_header_struct*)zend_llist_get_first_ex(&sapi_headers->headers, &pos);
         while (h) {
             /* prevent CRLFCRLF */
@@ -211,7 +212,7 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
             h = (sapi_header_struct*)zend_llist_get_next_ex(&sapi_headers->headers, &pos);
         }
         PHPWRITE_H("\r\n", 2);
-     
+
         return SAPI_HEADER_SENT_SUCCESSFULLY;
        }
 
@@ -225,7 +226,7 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
     #if PHP_FASTCGI
         char *pos = buffer;
     #endif
-     
+
         count_bytes = MIN(count_bytes, (uint) SG(request_info).content_length - SG(read_post_bytes));
         while (read_bytes < count_bytes) {
     #if PHP_FASTCGI
@@ -239,7 +240,7 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
     #else
             tmp_read_bytes = read(0, buffer + read_bytes, count_bytes - read_bytes);
     #endif
-     
+
             if (tmp_read_bytes <= 0) {
                 break;
             }
@@ -275,12 +276,12 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
         if (fcgi_is_fastcgi() && fcgi_logging) {
             fcgi_request *request;
             TSRMLS_FETCH();
-     
+
             request = (fcgi_request*) SG(server_context);
             if (request) {
                 int len = strlen(message);
                 char *buf = malloc(len+2);
-     
+
                 memcpy(buf, message, len);
                 memcpy(buf + len, "\n", sizeof("\n"));
                 fcgi_write(request, FCGI_STDERR, buf, len+1);
@@ -294,4 +295,4 @@ SAPI提供了一个和外部通信的接口， 对于PHP5.2，默认提供了很
         fprintf(stderr, "%s\n", message);
     }
 
-经过分析，我们已经了解了一个SAPI是如何实现的了， 分析过CGI以后，我们也就可以想象mod_php, embed等SAPI的实现机制。 
+经过分析，我们已经了解了一个SAPI是如何实现的了， 分析过CGI以后，我们也就可以想象mod_php, embed等SAPI的实现机制。

@@ -1,3 +1,9 @@
+---
+title: 15-操作码OpCode
+tags: php_internal
+categories: php
+---
+
 # 15-操作码OpCode
 运行一段PHP代码主要有两个阶段：编译和执行。 当然编译过程中还包括词法分析语法分析不同阶段和细节，这里我们将其作为一个整体。在这两个阶段之间，PHP代码会被编译成op code，可以将其认为是引擎的一个中间语言，编辑阶段把PHP源码生成op code，然后在执行阶段执行这些op code。这篇文章将简单的介绍op code。
 
@@ -12,7 +18,7 @@ PHP代码编译之后会生成许多的op，每一个op都是一个zend_op类型
         uint lineno;  
         zend_uchar opcode;  
     };  
-      
+
     typedef struct _zend_op zend_op;  
 
 简单的说说这几个字段：
@@ -49,7 +55,7 @@ op对应源代码文件中的行号。
 5.extended_value
 
 扩展字段暂时不介绍
-## 操作数znode简介 
+## 操作数znode简介
 
 操作数字段是这个类型中比较重要的部分了，其中op1,op2,result三个操作数定义为znode类型，znode相关定义在此文件中：
 
@@ -57,7 +63,7 @@ op对应源代码文件中的行号。
         int op_type;  
         union {  
             zval constant;  
-      
+
             zend_uint var;  
             zend_uint opline_num; /*  Needs to be signed */  
             zend_op_array *op_array;  

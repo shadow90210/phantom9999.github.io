@@ -1,3 +1,9 @@
+---
+title: 70-类的原型zend_class_entry
+tags: php_internal
+categories: php
+---
+
 # 70-类的原型zend_class_entry
 zend_class_entry是内核中定义的一个结构体，是内核实现PHP语言中类与对象的一个非常基础、关键的结构类型。他就相当于我们定义的类的原型。
 
@@ -13,7 +19,7 @@ zend_class_entry是内核中定义的一个结构体，是内核实现PHP语言�
     ZEND_MINIT_FUNCTION(sample3)
     {
         zend_class_entry ce;
-        
+
         //"myclass"是这个类的名称。
         INIT_CLASS_ENTRY(ce, "myclass",myclass_method);
         myclass_ce = zend_register_internal_class(&ce TSRMLS_CC);

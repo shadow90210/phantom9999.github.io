@@ -1,3 +1,9 @@
+---
+title: 20-PHP中的哈希表
+tags: php_internal
+categories: php
+---
+
 # 20-PHP中的哈希表
 PHP中使用最为频繁的数据类型非字符串和数组莫属，PHP比较容易上手也得益于非常灵活的数组类型。 在开始详细介绍这些数据类型之前有必要介绍一下哈希表(HashTable)。 哈希表是PHP实现中尤为关键的数据结构。
 
@@ -37,9 +43,9 @@ PHP中使用最为频繁的数据类型非字符串和数组莫属，PHP比较�
         char *key;
         void *value;
         struct _Bucket *next;
-     
+
     } Bucket;
-     
+
     typedef struct _HashTable
     {
         int size;
@@ -55,16 +61,16 @@ Bucket结构体是一个单链表，这是为了解决多个key哈希冲突的�
     static int hash_str(char *key)
     {
         int hash = 0;
-     
+
         char *cur = key;
-     
+
         while(*(cur++) != '\0') {
             hash += *cur;
         }
-     
+
         return hash;
     }
- 
+
     // 使用这个宏来求得key在哈希表中的索引
     #define HASH_INDEX(ht, key) (hash_str((key)) % (ht)->size)
 
@@ -86,30 +92,30 @@ Bucket结构体是一个单链表，这是为了解决多个key哈希冲突的�
         // check if we need to resize the hashtable
         resize_hash_table_if_needed(ht);    // 哈希表不固定大小，当插入的内容快占满哈表的存储空间
                                             // 将对哈希表进行扩容， 以便容纳所有的元素
-     
+
         int index = HASH_INDEX(ht, key);    // 找到key所映射到的索引
-     
+
         Bucket *org_bucket = ht->buckets[index];
         Bucket *bucket = (Bucket *)malloc(sizeof(Bucket)); // 为新元素申请空间
-     
+
         bucket->key   = strdup(key);
         // 将值内容保存进来， 这里只是简单的将指针指向要存储的内容，而没有将内容复制。
         bucket->value = value;  
-     
+
         LOG_MSG("Insert data p: %p\n", value);
-     
+
         ht->elem_num += 1; // 记录一下现在哈希表中的元素个数
-     
+
         if(org_bucket != NULL) { // 发生了碰撞，将新元素放置在链表的头部
             LOG_MSG("Index collision found with org hashtable: %p\n", org_bucket);
             bucket->next = org_bucket;
         }
-     
+
         ht->buckets[index]= bucket;
-     
+
         LOG_MSG("Element inserted at index %i, now we have: %i elements\n",
             index, ht->elem_num);
-     
+
         return SUCCESS;
     }
 
@@ -119,9 +125,9 @@ Bucket结构体是一个单链表，这是为了解决多个key哈希冲突的�
     {
         int index = HASH_INDEX(ht, key);
         Bucket *bucket = ht->buckets[index];
-     
+
         if(bucket == NULL) return FAILED;
-     
+
         // 查找这个链表以便找到正确的元素，通常这个链表应该是只有一个元素的，也就不用多次
         // 循环。要保证这一点需要有一个合适的哈希算法，见前面相关哈希函数的链接。
         while(bucket)
@@ -133,10 +139,10 @@ Bucket结构体是一个单链表，这是为了解决多个key哈希冲突的�
                 *result = bucket->value;    
                 return SUCCESS;
             }
-     
+
             bucket = bucket->next;
         }
-     
+
         LOG_MSG("HashTable lookup missed the key: %s\n", key);
         return FAILED;
     }

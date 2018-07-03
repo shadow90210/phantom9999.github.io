@@ -1,3 +1,9 @@
+---
+title: 23-翻译一篇HashTables文章
+tags: php_internal
+categories: php
+---
+
 # 23-翻译一篇HashTables文章
 In case you ever heard me talking about PHP internals I certainly mentioned something along the lines of "Everything in PHP is a HashTable" that's not true, but next to a zval the HashTable is one of the most important structures in PHP. While preparing my "PHP Under The Hood" talk for the Dutch PHP Conference there was a question on IRC about extension_loaded() being faster thanfunction_exists(), which might be strange as both of them are simple hash lookups and a hash lookup is said to be O(1). I started to write some slides for it but figured out that I won't have the time to go through it during that presentation, so I'm doing this now, here:
 

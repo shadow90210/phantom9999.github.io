@@ -1,3 +1,9 @@
+---
+title: 88-zend_execute的具体执行过程
+tags: php_internal
+categories: php
+---
+
 # 88-zend_execute的具体执行过程
 解释器引擎最终执行op的函数是zend_execute，实际上zend_execute是一个函数指针，在引擎初始化的时候zend_execute默认指向了execute,这个execute定义在{PHPSRC}/Zend/zend_vm_execute.h：
 
@@ -6,21 +12,21 @@
         zend_execute_data *execute_data;  
         zend_bool nested = 0;  
         zend_bool original_in_execution = EG(in_execution);  
-      
-      
+
+
         if (EG(exception)) {  
             return;  
         }  
-      
+
         EG(in_execution) = 1;  
-      
+
     zend_vm_enter:  
         /* Initialize execute_data */  
         execute_data = (zend_execute_data *)zend_vm_stack_alloc(  
             ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)) +  
             ZEND_MM_ALIGNED_SIZE(sizeof(zval**) * op_array->last_var * (EG(active_symbol_table) ? 1 : 2)) +  
             ZEND_MM_ALIGNED_SIZE(sizeof(temp_variable)) * op_array->T TSRMLS_CC);  
-      
+
         EX(CVs) = (zval***)((char*)execute_data + ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)));  
         memset(EX(CVs), 0, sizeof(zval**) * op_array->last_var);  
         EX(Ts) = (temp_variable *)(((char*)EX(CVs)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval**) * op_array->last_var * (EG(active_symbol_table) ? 1 : 2)));  
@@ -34,13 +40,13 @@
         EG(current_execute_data) = execute_data;  
         EX(nested) = nested;  
         nested = 1;  
-      
+
         if (op_array->start_op) {  
             ZEND_VM_SET_OPCODE(op_array->start_op);  
         } else {  
             ZEND_VM_SET_OPCODE(op_array->opcodes);  
         }  
-      
+
         if (op_array->this_var != -1 && EG(This)) {  
             Z_ADDREF_P(EG(This)); /* For $this pointer */  
             if (!EG(active_symbol_table)) {  
@@ -52,12 +58,12 @@
                 }  
             }  
         }  
-      
+
         EG(opline_ptr) = &EX(opline);  
-      
+
         EX(function_state).function = (zend_function *) op_array;  
         EX(function_state).arguments = NULL;  
-          
+
         while (1) {  
             int ret;  
     #ifdef ZEND_WIN32  
@@ -65,7 +71,7 @@
                 zend_timeout(0);  
             }  
     #endif  
-      
+
             if ((ret = EX(opline)->handler(execute_data TSRMLS_CC)) > 0) {  
                 switch (ret) {  
                     case 1:  
@@ -80,7 +86,7 @@
                         break;  
                 }  
             }  
-      
+
         }  
         zend_error_noreturn(E_ERROR, "Arrived at end of main loop which shouldn't happen");  
     }
@@ -103,44 +109,44 @@
         zend_bool pass_rest_by_reference;  
         unsigned char return_reference;  
         /* END of common elements */  
-      
+
         zend_bool done_pass_two;  
-      
+
         zend_uint *refcount;  
-      
+
         zend_op *opcodes;  
         zend_uint last, size;  
-      
+
         zend_compiled_variable *vars;  
         int last_var, size_var;  
-      
+
         zend_uint T;  
-      
+
         zend_brk_cont_element *brk_cont_array;  
         int last_brk_cont;  
         int current_brk_cont;  
-      
+
         zend_try_catch_element *try_catch_array;  
         int last_try_catch;  
-      
+
         /* static variables support */  
         HashTable *static_variables;  
-      
+
         zend_op *start_op;  
         int backpatch_count;  
-      
+
         zend_uint this_var;  
-      
+
         char *filename;  
         zend_uint line_start;  
         zend_uint line_end;  
         char *doc_comment;  
         zend_uint doc_comment_len;  
         zend_uint early_binding; /* the linked list of delayed declarations */  
-      
+
         void *reserved[ZEND_MAX_RESERVED_RESOURCES];  
     };  
-      
+
     typedef struct _zend_op_array zend_op_array;  
 
 此结构比较复杂，我们目前只介绍最基本的几个字段。
@@ -191,18 +197,18 @@ execute函数开始的时候是一些基础变量的申明，其中zend_execute_
         CHECK_SYMBOL_TABLES() /  
         EX(opline)++; /  
         ZEND_VM_CONTINUE()  
-      
+
     #define ZEND_VM_SET_OPCODE(new_op) /  
         CHECK_SYMBOL_TABLES() /  
         EX(opline) = new_op  
-      
+
     #define ZEND_VM_JMP(new_op) /  
         CHECK_SYMBOL_TABLES() /  
         if (EXPECTED(!EG(exception))) { /  
             EX(opline) = new_op; /  
         } /  
         ZEND_VM_CONTINUE()  
-      
+
     #define ZEND_VM_INC_OPCODE() /  
         EX(opline)++
 
@@ -285,9 +291,9 @@ execute函数开始的时候是一些基础变量的申明，其中zend_execute_
 
     <?php  
     $a = 123;  
-      
+
     test();  
-      
+
     function test()  
     {  
         return 1;  

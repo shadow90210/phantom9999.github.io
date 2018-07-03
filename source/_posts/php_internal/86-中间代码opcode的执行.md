@@ -1,3 +1,9 @@
+---
+title: 86-中间代码opcode的执行
+tags: php_internal
+categories: php
+---
+
 # 86-中间代码opcode的执行
 假如我们现在使用的是CLI模式，直接在SAPI/cli/php_cli.c文件中找到main函数， 默认情况下PHP的CLI模式的行为模式为PHP_MODE_STANDARD。 此行为模式中PHP内核会调用php_execute_script(&file_handle TSRMLS_CC);来执行PHP文件。 顺着这条执行的线路，可以看到一个PHP文件在经过词法分析，语法分析，编译后生成中间代码的过程：
 
@@ -49,11 +55,11 @@
                 _UNUSED_CODE, /* 15             */
                 _CV_CODE      /* 16 = IS_CV     */
             };
-            return zend_opcode_handlers[opcode * 25 
-                    + zend_vm_decode[op->op1.op_type] * 5 
+            return zend_opcode_handlers[opcode * 25
+                    + zend_vm_decode[op->op1.op_type] * 5
                     + zend_vm_decode[op->op2.op_type]];
     }
-     
+
     ZEND_API void zend_vm_set_opcode_handler(zend_op* op)
     {
         op->handler = zend_vm_get_opcode_handler(zend_user_opcodes[op->opcode], op);
@@ -69,7 +75,7 @@
     CHECK_SYMBOL_TABLES() \
     EX(opline)++; \
     ZEND_VM_CONTINUE()
-     
+
     #define ZEND_VM_CONTINUE()   return 0
 
 在execute函数中，处理函数的执行是在一个while(1)循环作用范围中。如下：
@@ -81,7 +87,7 @@
                 zend_timeout(0);
             }
     #endif
-     
+
             if ((ret = EX(opline)->handler(execute_data TSRMLS_CC)) > 0) {
                 switch (ret) {
                     case 1:
@@ -96,7 +102,7 @@
                         break;
                 }
             }
-     
+
         }
 
 前面说到每个中间代码在执行完后都会将中间代码的指针指向下一条指令，并且返回0。 当返回0时，while 循环中的if语句都不满足条件，从而使得中间代码可以继续执行下去。 正是这个while(1)的循环使得PHP内核中的opcode可以从第一条执行到最后一条， 当然这中间也有一些函数的跳转或类方法的执行等。
@@ -125,9 +131,9 @@
 
 上一段代码中的ZEND_VM_ENTER()定义在Zend/zend_vm_execute.h的开头，如下：
 
-    #define ZEND_VM_CONTINUE()   return 0 
-    #define ZEND_VM_RETURN()     return 1 
-    #define ZEND_VM_ENTER()      return 2 
+    #define ZEND_VM_CONTINUE()   return 0
+    #define ZEND_VM_RETURN()     return 1
+    #define ZEND_VM_ENTER()      return 2
     #define ZEND_VM_LEAVE()      return 3
 
 这些在中间代码的执行函数中都有用到，这里的ZEND_VM_ENTER()表示return 2。 在前面的内容中我们有说到在调用了EX(opline)->handler(execute_data TSRMLS_CC))后会将返回值赋值给ret。 然后根据ret判断下一步操作，这里的递归函数是返回2，于是下一步操作是：
@@ -162,12 +168,12 @@ Zend中间代码调用路径图
 因此我们在execute函数或在opcode的实现函数中会看到EX(fbc)，EX(object)等宏调用， 它们是调用函数局部变量execute_data的元素：execute_data.fbc和execute_data.object。 execute_data不仅仅只有fbc、object等元素，它包含了执行过程中的中间代码，上一次执行的函数，函数执行的当前作用域，类等信息。 其结构如下：
 
     typedef struct _zend_execute_data zend_execute_data;
-     
+
     struct _zend_execute_data {
         struct _zend_op *opline;
         zend_function_state function_state;
         zend_function *fbc; /* Function Being Called */
-        zend_class_entry *called_scope; 
+        zend_class_entry *called_scope;
         zend_op_array *op_array;  /* 当前执行的中间代码 */
         zval *object;
         union _temp_variable *Ts;
@@ -206,20 +212,20 @@ zend_execute_data结构体部分字段说明如下：
         zend_vm_stack prev;
         void *elements[1];
     };
-     
+
     if (UNEXPECTED(EG(argument_stack)->top == EG(argument_stack)->elements)) {
     }
-     
+
     //  PHP5.3.1
     struct _zend_vm_stack {
         void **top;
         void **end;
         zend_vm_stack prev;
     };
-     
+
     if (UNEXPECTED(EG(argument_stack)->top == ZEND_VM_STACK_ELEMETS(EG(argument_stack)))) {
     }
-     
+
     #define ZEND_VM_STACK_ELEMETS(stack) \
     ((void**)(((char*)(stack)) + ZEND_MM_ALIGNED_SIZE(sizeof(struct _zend_vm_stack))))
 

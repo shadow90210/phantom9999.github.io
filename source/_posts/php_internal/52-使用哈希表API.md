@@ -1,3 +1,9 @@
+---
+title: 52-使用哈希表API
+tags: php_internal
+categories: php
+---
+
 # 52-使用哈希表API
 Zend把与HashTable有关的API分成了好几类以便于我们寻找，这些API的返回值大多都是常量SUCCESS或者FAILURE。
 ## 创建HashTable
@@ -176,7 +182,7 @@ zend_hash_add()和zend_hash_update()唯一的区别就是如果这个key已经�
             //标明不存在这个索引
             return;
         }
-        
+
         //这个zval已经被其它的Hashtable使用了，这里我们进行引用计数操作。
         (*copyval)->refcount__gc++;
         zend_hash_quick_update(htb, arKey, nKeyLen, hashval,copyval, sizeof(zval*), NULL);
@@ -213,7 +219,7 @@ zend_hash_merge()与zend_hash_copy唯一的不同便是多了个int类型的over
     void zend_hash_merge_ex(
     	HashTable *target,
     	HashTable *source,
-    	copy_ctor_func_t pCopyConstructor, 
+    	copy_ctor_func_t pCopyConstructor,
     	uint size,
     	merge_checker_func_t pMergeSource,
     	void *pParam
@@ -246,9 +252,9 @@ zend_hash_merge()与zend_hash_copy唯一的不同便是多了个int类型的over
 
 
 
-		
-		
-		
+
+
+
 
 我们来一下PHP语言中的forech循环：
 
@@ -265,19 +271,19 @@ zend_hash_merge()与zend_hash_copy唯一的不同便是多了个int类型的over
     	//重新copy一个zval，防止破坏原数据
         zval tmpcopy = **val;
         zval_copy_ctor(&tmpcopy);
-        
+
         //转换为字符串
         INIT_PZVAL(&tmpcopy);
         convert_to_string(&tmpcopy);
-       
+
        	//开始输出
         php_printf("The value is: ");
         PHPWRITE(Z_STRVAL(tmpcopy), Z_STRLEN(tmpcopy));
         php_printf("\n");
-        
+
         //毁尸灭迹
         zval_dtor(&tmpcopy);
-        
+
        	//返回，继续遍历下一个～
     	return ZEND_HASH_APPLY_KEEP;
     }
@@ -311,10 +317,10 @@ zend_hash_merge()与zend_hash_copy唯一的不同便是多了个int类型的over
     	TSRMLS_FETCH();
     	zval_copy_ctor(&tmpcopy);
     	INIT_PZVAL(&tmpcopy);
-    	
+
     	//转换为字符串
     	convert_to_string(&tmpcopy);
-        
+
     	//执行输出
     	php_printf("The value of ");
     	if (hash_key->nKeyLength)
@@ -327,11 +333,11 @@ zend_hash_merge()与zend_hash_copy唯一的不同便是多了个int类型的over
     		//如果是数字类型的key
     		php_printf("%ld", hash_key->h);
         }
-    	
+
     	php_printf(" is: ");
     	PHPWRITE(Z_STRVAL(tmpcopy), Z_STRLEN(tmpcopy));
     	php_printf("\n");
-    	
+
     	//毁尸灭迹
     	zval_dtor(&tmpcopy);
     	/* continue; */
@@ -411,14 +417,14 @@ PHP语言中的next()、prev()、end()函数在移动完指针之后，都通过
                  * since the key is known to exist. */
                 continue;
             }
-            
+
             //重新copy一个zval，防止破坏原数据
             tmpcopy = **ppzval;
             zval_copy_ctor(&tmpcopy);
             INIT_PZVAL(&tmpcopy);
-            
+
             convert_to_string(&tmpcopy);
-            
+
             /* Output */
             php_printf("The value of ");
             if (type == HASH_KEY_IS_STRING)
@@ -509,16 +515,16 @@ PHP语言中的next()、prev()、end()函数在移动完指针之后，都通过
     int sample_strvec_handler(int argc, char **argv TSRMLS_DC)
     {
         HashTable *ht;
-        
+
         //分配内存
         ALLOC_HASHTABLE(ht);
-        
+
         //初始化
         if (zend_hash_init(ht, argc, NULL,ZVAL_PTR_DTOR, 0) == FAILURE) {
             FREE_HASHTABLE(ht);
             return FAILURE;
         }
-        
+
         //填充数据
         while (argc) {
             zval *value;
@@ -531,10 +537,10 @@ PHP语言中的next()、prev()、end()函数在移动完指针之后，都通过
                 zval_ptr_dtor(&value);
             }
         }
-        
+
         //完成工作
         process_hashtable(ht);
-        
+
         //毁尸灭迹
         zend_hash_destroy(ht);
 

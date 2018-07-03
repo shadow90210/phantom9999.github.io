@@ -1,3 +1,9 @@
+---
+title: 44-Zend内存管理器
+tags: php_internal
+categories: php
+---
+
 # 44-Zend内存管理器
 在PHP里，我们可以定义字符串变量，比如 <?php $str="nowamagic"; ?>，$str这个字符串变量可以被自由的修改与复制等。这一切在C语言里看起来都是不可能的事情，我们用#char *p = "hello";#来定义一个字符串，但它是常量，是不能被修改的，如果你用p[1]='c';来修改这个字符串会引发段错误(Gcc,c99)，为了修改C语言里的字符串常量，我们往往需要定义字符串数组。为了得到一个能够让我们自由修改的字符串，我们往往需要用strdup函数来复制一个字符串出来。
 
@@ -67,7 +73,7 @@
 例如，pemalloc(buffer_len，1)将映射到malloc(buffer_len)，而pemalloc(buffer_len，0)将被使用下列语句映射到emalloc(buffer_len)：
 
     //define in Zend/zend_alloc.h:
-    #define pemalloc(size, persistent)	((persistent)?malloc(size): emalloc(size))	
+    #define pemalloc(size, persistent)	((persistent)?malloc(size): emalloc(size))
 
 所有这些在ZendMM中提供的内存管理函数都能够从下表中找到其在C语言中的函数。
 

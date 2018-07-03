@@ -1,3 +1,9 @@
+---
+title: 40-变量的value和type存储
+tags: php_internal
+categories: php
+---
+
 # 40-变量的value和type存储
 PHP是一种弱类型的脚本语言，弱类型不表示PHP的变量没有类型区分，PHP变量有8种原始类型：
 

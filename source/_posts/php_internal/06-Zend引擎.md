@@ -1,3 +1,9 @@
+---
+title: 06-Zend引擎
+tags: php_internal
+categories: php
+---
+
 # 06-Zend引擎
 相信很多人都听说过 Zend Engine 这个名词，也有很多人知道 Zend Engine 就是 PHP 语言的核心，但若要问一句：Zend Engine 到底存在于何处？或者说，Zend Engine 究竟是在什么时候怎么发挥作用让 PHP 源码输出我们想要的东西的？
 

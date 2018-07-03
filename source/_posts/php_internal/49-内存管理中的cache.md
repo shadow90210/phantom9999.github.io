@@ -1,3 +1,9 @@
+---
+title: 49-内存管理中的cache
+tags: php_internal
+categories: php
+---
+
 # 49-内存管理中的cache
 在维基百科中有这样一段描述： 凡是位于速度相差较大的两种硬件之间的，用于协调两者数据传输速度差异的结构，均可称之为Cache。 从最初始的处理器与内存间的Cache开始，都是为了让数据访问的速度适应CPU的处理速度， 其基于的原理是内存中“程序执行与数据访问的局域性行为”。 同样PHP内存管理中的缓存也是基于“程序执行与数据访问的局域性行为”的原理。 引入缓存，就是为了减少小块内存块的查询次数，为最近访问的数据提供更快的访问方式。
 
@@ -13,7 +19,7 @@ PHP将缓存添加到内存管理机制中做了如下一些操作：
 首先我们看标识缓存和缓存的大小限制，在PHP内核中，是否使用缓存的标识是宏ZEND_MM_CACHE（Zend/zend_alloc.c 400行）， 缓存的大小限制与size_t结构大小有关，假设size_t占4位，则默认情况下，PHP内核给PHP内存管理的限制是128K(32 * 4 * 1024)。 如下所示代码：
 
     #define ZEND_MM_NUM_BUCKETS (sizeof(size_t) << 3)
-     
+
     #define ZEND_MM_CACHE 1
     #define ZEND_MM_CACHE_SIZE (ZEND_MM_NUM_BUCKETS * 4 * 1024)
 
@@ -22,7 +28,7 @@ PHP将缓存添加到内存管理机制中做了如下一些操作：
 如果我们启用了缓存，则在堆层结构中增加了两个字段：
 
     struct _zend_mm_heap {
-     
+
     #if ZEND_MM_CACHE
         unsigned int        cached; //  已缓存元素使用内存的总大小
         zend_mm_free_block *cache[ZEND_MM_NUM_BUCKETS]; //  存放被缓存的块
@@ -43,7 +49,7 @@ PHP将缓存添加到内存管理机制中做了如下一些操作：
         if (EXPECTED(ZEND_MM_SMALL_SIZE(size)) && EXPECTED(heap->cached < ZEND_MM_CACHE_SIZE)) {
             size_t index = ZEND_MM_BUCKET_INDEX(size);
             zend_mm_free_block **cache = &heap->cache[index];
-     
+
             ((zend_mm_free_block*)mm_block)->prev_free_block = *cache;
             *cache = (zend_mm_free_block*)mm_block;
             heap->cached += size;

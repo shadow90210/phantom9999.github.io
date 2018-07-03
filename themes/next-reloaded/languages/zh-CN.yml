@@ -14,6 +14,9 @@ menu:
   schedule: 日程表
   sitemap: 站点地图
   commonweal: 公益 404
+  cpp-devel: c++开发
+  php-devel: php开发
+  essay: 随笔
 sidebar:
   overview: 站点概览
   toc: 文章目录
@@ -43,6 +46,7 @@ post:
 page:
   totally: 共有
   tags: 标签
+  categories: 分类
 footer:
   powered: "由 %s 强力驱动"
   theme: 主题

@@ -1,3 +1,9 @@
+---
+title: 62-形参return value
+tags: php_internal
+categories: php
+---
+
 # 62-形参return value
 PHP语言中函数的返回值是通过return来完成了，就像下面的程序：
 
@@ -134,7 +140,7 @@ return_value如此重要，内核肯定早已经为它准备了大量的宏，�
 
 其实，zend internal function的形参中还有一个比较常用的名为return_value_used的参数，它是干嘛使的呢？它用来标志这个函数的返回值在用户端有没有用到。看下面的代码：
 
-    <?php 
+    <?php
     function sample_array_range() {
         $ret = array();
         for($i = 0; $i < 1000; $i++) {
@@ -153,7 +159,7 @@ sample_array_range()仅仅是执行了一下而已，并没有使用到函数的
     {
         if (return_value_used) {
             int i;
-            
+
             //把返回值初始化成一个PHP语言中的数组
             array_init(return_value);
             for(i = 0; i < 1000; i++)
@@ -198,7 +204,7 @@ sample_array_range()仅仅是执行了一下而已，并没有使用到函数的
     {
     	zval **a_ptr;
     	zval *a;
-    	
+
     	//检查全局作用域中是否有$a这个变量，如果没有则添加一个
     	//在内核中真的是可以胡作非为啊，:-)
     	if(zend_hash_find(&EG(symbol_table) , "a",sizeof("a"),(void **)&a_ptr ) == SUCCESS )
@@ -210,7 +216,7 @@ sample_array_range()仅仅是执行了一下而已，并没有使用到函数的
     		ALLOC_INIT_ZVAL(a);
             zend_hash_add(&EG(symbol_table), "a", sizeof("a"), &a,sizeof(zval*), NULL);
     	}
-    	
+
     	//废弃return_value,使用return_value_ptr来接替它的工作
     	zval_ptr_dtor(return_value_ptr);
     	if( !a->is_ref__gc && a->refcount__gc > 1 )

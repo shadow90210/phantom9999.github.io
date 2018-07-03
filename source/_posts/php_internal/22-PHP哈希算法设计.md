@@ -1,3 +1,9 @@
+---
+title: 22-PHP哈希算法设计
+tags: php_internal
+categories: php
+---
+
 # 22-PHP哈希算法设计
 Hash Table是PHP的核心，这话一点都不过分。PHP的数组、关联数组、对象属性、函数表、符号表等等都是用HashTable来做为容器的。
 
@@ -14,7 +20,7 @@ PHP的Hash采用的是目前最为普遍的DJBX33A (Daniel J. Bernstein, Times 3
     static inline ulong zend_inline_hash_func(char *arKey, uint nKeyLength)
     {
         register ulong hash = 5381;
-     
+
         /* variant with the hash unrolled eight times */
     	for (; nKeyLength >= 8; nKeyLength -= 8) {
             hash = ((hash << 5) + hash) + *arKey++;

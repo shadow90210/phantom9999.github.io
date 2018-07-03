@@ -1,4 +1,10 @@
-# 11.嵌入式PHP
+---
+title: 11-嵌入式PHP
+tags: php_internal
+categories: php
+---
+
+# 11-嵌入式PHP
 从PHP源码目录结构的介绍以及PHP生命周期可知：嵌入式PHP类似CLI，也是SAPI接口的另一种实现。 一般情况下，它的一个请求的生命周期也会和其它的SAPI一样：模块初始化=>请求初始化=>处理请求=>关闭请求=>关闭模块。 当然，这只是理想情况。因为特定的应用由自己特殊的需求，只是在处理PHP脚本这个环节基本一致。
 
 对于嵌入式PHP或许我们了解比较少，或者说根本用不到，甚至在网上相关的资料也不多， 例如很多游戏中使用Lua语言作为粘合语言，或者作为扩展游戏的脚本语言，类似的， 浏览器中的Javascript语言就是嵌入在浏览器中的。只是目前很少有应用将PHP作为嵌入语言来使用， PHP的强项目前还是在Web开发方面。
@@ -110,7 +116,7 @@ execute_php函数：
 
     <?php
     if($argc < 2) die("Usage: embed4 scriptfile");
-     
+
     include $argv[1];
     ?>
 
@@ -135,32 +141,32 @@ main函数：
     sapi_module_struct php_embed_module = {
         "embed",                       /* name */
         "PHP Embedded Library",        /* pretty name */
-     
+
         php_embed_startup,              /* startup */
         php_module_shutdown_wrapper,   /* shutdown */
-     
+
         NULL,                          /* activate */
         php_embed_deactivate,           /* deactivate */
-     
+
         php_embed_ub_write,             /* unbuffered write */
         php_embed_flush,                /* flush */
         NULL,                          /* get uid */
         NULL,                          /* getenv */
-     
+
         php_error,                     /* error handler */
-     
+
         NULL,                          /* header handler */
         NULL,                          /* send headers handler */
         php_embed_send_header,          /* send header handler */
-     
+
         NULL,                          /* read POST data */
         php_embed_read_cookies,         /* read Cookies */
-     
+
         php_embed_register_variables,   /* register server variables */
         php_embed_log_message,          /* Log message */
         NULL,                           /* Get request time */
         NULL,                           /* Child terminate */
-     
+
         STANDARD_SAPI_MODULE_PROPERTIES
     };
     /* }}} */

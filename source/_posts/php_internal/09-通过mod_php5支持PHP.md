@@ -1,3 +1,9 @@
+---
+title: 09-通过mod_php5支持PHP
+tags: php_internal
+categories: php
+---
+
 # 09-通过mod_php5支持PHP
 Apache对PHP的支持是通过Apache的模块mod_php5来支持的。如果希望Apache支持PHP的话，在./configure步骤需要指定--with-apxs2=/usr/local/apache2/bin/apxs 表示告诉编译器通过Apache的mod_php5/apxs来提供对PHP5的解析。
 
@@ -89,32 +95,32 @@ php_ap2_register_hook函数的定义如下：
     static sapi_module_struct apache2_sapi_module = {
     "apache2handler",
     "Apache 2.0 Handler",
-     
+
     php_apache2_startup,                /* startup */
     php_module_shutdown_wrapper,            /* shutdown */
-     
+
     NULL,                       /* activate */
     NULL,                       /* deactivate */
-     
+
     php_apache_sapi_ub_write,           /* unbuffered write */
     php_apache_sapi_flush,              /* flush */
     php_apache_sapi_get_stat,           /* get uid */
     php_apache_sapi_getenv,             /* getenv */
-     
+
     php_error,                  /* error handler */
-     
+
     php_apache_sapi_header_handler,         /* header handler */
     php_apache_sapi_send_headers,           /* send headers handler */
     NULL,                       /* send header handler */
-     
+
     php_apache_sapi_read_post,          /* read POST data */
     php_apache_sapi_read_cookies,           /* read Cookies */
-     
+
     php_apache_sapi_register_variables,
     php_apache_sapi_log_message,            /* Log message */
     php_apache_sapi_get_request_time,       /* Request Time */
     NULL,                       /* Child Terminate */
-     
+
     STANDARD_SAPI_MODULE_PROPERTIES
     };
 

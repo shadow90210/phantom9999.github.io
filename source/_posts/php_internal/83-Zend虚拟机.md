@@ -1,3 +1,9 @@
+---
+title: 83-Zend虚拟机
+tags: php_internal
+categories: php
+---
+
 # 83-Zend虚拟机
 通过前面的学习，我们了解到一个PHP文件在服务器端的执行过程包括以下两个大的过程：
 

@@ -1,3 +1,9 @@
+---
+title: 16-PHP里的opcode
+tags: php_internal
+categories: php
+---
+
 # 16-PHP里的opcode
 opcode是计算机指令中的一部分，用于指定要执行的操作， 指令的格式和规范由处理器的指令规范指定。 除了指令本身以外通常还有指令所需要的操作数，可能有的指令不需要显式的操作数。 这些操作数可能是寄存器中的值，堆栈中的值，某块内存的值或者IO端口中的值等等。
 
@@ -24,7 +30,7 @@ PHP中的opcode则属于前面介绍中的后着，PHP是构建在Zend虚拟机(
     void zend_do_print(znode *result，const znode *arg TSRMLS_DC)
     {
         zend_op *opline = get_next_op(CG(active_op_array) TSRMLS_CC);
-     
+
         opline->result.op_type = IS_TMP_VAR;
         opline->result.u.var = get_temporary_variable(CG(active_op_array));
         opline->opcode = ZEND_PRINT;
@@ -40,7 +46,7 @@ PHP中的opcode则属于前面介绍中的后着，PHP是构建在Zend虚拟机(
     void zend_do_echo(const znode *arg TSRMLS_DC)
     {
         zend_op *opline = get_next_op(CG(active_op_array) TSRMLS_CC);
-     
+
         opline->opcode = ZEND_ECHO;
         opline->op1 = *arg;
         SET_UNUSED(opline->op2);
@@ -63,18 +69,18 @@ PHP脚本编译为opcode保存在op_array中，其内部存储的结构如下：
         zend_bool pass_rest_by_reference;
         unsigned char return_reference;
         /* END of common elements */
-     
+
         zend_bool done_pass_two;
-     
+
         zend_uint *refcount;
-     
+
         zend_op *opcodes;  // opcode数组
-     
+
         zend_uint last，size;
-     
+
         zend_compiled_variable *vars;
         int last_var，size_var;
-     
+
         // ...
     }
 

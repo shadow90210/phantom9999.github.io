@@ -1,3 +1,9 @@
+---
+title: 21-理解Zend里的哈希表
+tags: php_internal
+categories: php
+---
+
 # 21-理解Zend里的哈希表
 在PHP的Zend引擎中，有一个数据结构非常重要，它无处不在，是PHP数据存储的核心，各种常量、变量、函数、类、对象等都用它来组织，这个数据结构就是HashTable。
 
@@ -45,7 +51,7 @@ HashTable中所有的Bucket通过pListNext, pListLast构成了一个双向链表
     zend_bool persistent;
     unsigned char nApplyCount;
     zend_bool bApplyProtection;
-     
+
     #if ZEND_DEBUG
     int inconsistent;
     #endif
@@ -111,9 +117,9 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     {
     uint i = 3;
     Bucket **tmp;
-     
+
     SET_INCONSISTENT(HT_OK);
-     
+
     if (nSize >= 0×80000000) {
     /* prevent overflow */
     ht->nTableSize = 0×80000000;
@@ -129,7 +135,7 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     ht->persistent = persistent;
     ht->nApplyCount = 0;
     ht->bApplyProtection = 1;
-     
+
     /* 根据persistent使用不同方式分配arBuckets内存，并将其所有指针初始化为NULL*/
     /* Uses ecalloc() so that Bucket* == NULL */
     if (persistent) {
@@ -144,7 +150,7 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     ht->arBuckets = tmp;
     }
     }
-     
+
     return SUCCESS;
     }
 
@@ -163,13 +169,13 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     ulong h;
     uint nIndex;
     Bucket *p;
-     
+
     IS_CONSISTENT(ht);     // 调试信息输出
-     
+
     if (nKeyLength <= 0) { #if ZEND_DEBUG ZEND_PUTS(”zend_hash_update: Can’t put in empty key\n”); #endif return FAILURE; } /* 使用hash函数计算arKey的hash值 */ h = zend_inline_hash_func(arKey, nKeyLength); /* 将hash值和nTableMask按位与后生成该元素在arBuckets中的索引。让它和 * nTableMask按位与是保证不会产生一个使得arBuckets越界的数组下标。 */ nIndex = h & ht->nTableMask;
-     
+
     p = ht->arBuckets[nIndex];   /* 取得相应索引对应的Bucket的指针 */
-     
+
     /* 检查对应的桶列中是否包含有数据元素(key, hash) */
     while (p != NULL) {
     if ((p->h == h) && (p->nKeyLength == nKeyLength)) {
@@ -200,7 +206,7 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     }
     p = p->pNext;
     }
-     
+
     /* HashTable中没有key对应的数据，新增一个Bucket　*/
     p = (Bucket *) pemalloc(sizeof(Bucket) - 1 + nKeyLength, ht->persistent);
     if (!p) {
@@ -215,13 +221,13 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     if (pDest) {
     *pDest = p->pData;
     }
-     
+
     HANDLE_BLOCK_INTERRUPTIONS();
     //　将Bucket 加入到HashTable的双向链表中
     CONNECT_TO_GLOBAL_DLLIST(p, ht);
     ht->arBuckets[nIndex] = p;
     HANDLE_UNBLOCK_INTERRUPTIONS();
-     
+
     ht->nNumOfElements++;
     // 如果HashTable已满，重新调整HashTable的大小。
     ZEND_HASH_IF_FULL_DO_RESIZE(ht);   /* If the Hash table is full, resize it */
@@ -245,16 +251,16 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     {
     uint nIndex;
     Bucket *p;
-     
+
     IS_CONSISTENT(ht);
-     
+
     if (flag & HASH_NEXT_INSERT) {
     h = ht->nNextFreeElement;
     }
     nIndex = h & ht->nTableMask;
-     
+
     p = ht->arBuckets[nIndex];
-     
+
     // 检查是否含有相应的数据
     while (p != NULL) {
     if ((p->nKeyLength == 0) && (p->h == h)) {
@@ -284,14 +290,14 @@ HashTable提供了一个zend_hash_init宏来完成HashTable的初始化操作。
     if (pDest) {
     *pDest = p->pData;
     }
-     
+
     CONNECT_TO_BUCKET_DLLIST(p, ht->arBuckets[nIndex]);
-     
+
     HANDLE_BLOCK_INTERRUPTIONS();
     ht->arBuckets[nIndex] = p;
     CONNECT_TO_GLOBAL_DLLIST(p, ht);
     HANDLE_UNBLOCK_INTERRUPTIONS();
-     
+
     if ((long)h >= (long)ht->nNextFreeElement) {
     ht->nNextFreeElement = h + 1;
     }
@@ -322,18 +328,18 @@ HashTable删除数据均使用zend_hash_del_key_or_index()函数来完成，其�
     * ZEND_HASH_APPLY_STOP   - stop iteration
     * ZEND_HASH_APPLY_REMOVE - delete the element, combineable with the former
     */
-     
+
     ZEND_API void zend_hash_apply(HashTable *ht, apply_func_t apply_func TSRMLS_DC)
     {
     Bucket *p;
-     
+
     IS_CONSISTENT(ht);
-     
+
     HASH_PROTECT_RECURSION(ht);
     p = ht->pListHead;
     while (p != NULL) {
     int result = apply_func(p->pData TSRMLS_CC);
-     
+
     if (result & ZEND_HASH_APPLY_REMOVE) {
     p = zend_hash_apply_deleter(ht, p);
     } else {
@@ -366,7 +372,7 @@ HashTable删除数据均使用zend_hash_del_key_or_index()函数来完成，其�
     typedef int (*apply_func_arg_t)(void *pDest,void *argument TSRMLS_DC);
     void zend_hash_apply_with_argument(HashTable *ht,
     apply_func_arg_t apply_func, void *data TSRMLS_DC);
-     
+
     typedef int (*apply_func_args_t)(void *pDest,
     int num_args, va_list args, zend_hash_key *hash_key);
     void zend_hash_apply_with_arguments(HashTable *ht,

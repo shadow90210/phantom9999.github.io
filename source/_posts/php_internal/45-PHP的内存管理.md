@@ -1,3 +1,9 @@
+---
+title: 45-PHP的内存管理
+tags: php_internal
+categories: php
+---
+
 # 45-PHP的内存管理
 内存管理一般会包括以下内容：
 
@@ -39,29 +45,29 @@ PHP内存管理器
         size_t _size;   /* block的大小*/
         size_t _prev;   /* 计算前一个块有用到*/
     } zend_mm_block_info;
-     
-     
+
+
     typedef struct _zend_mm_block {
         zend_mm_block_info info;
     } zend_mm_block;
-     
+
     typedef struct _zend_mm_small_free_block {  /* 双向链表 */
         zend_mm_block_info info;
         struct _zend_mm_free_block *prev_free_block;    /* 前一个块 */
         struct _zend_mm_free_block *next_free_block;    /* 后一个块 */
     } zend_mm_small_free_block; /* 小的空闲块*/
-     
+
     typedef struct _zend_mm_free_block {    /* 双向链表 + 树结构 */
         zend_mm_block_info info;
         struct _zend_mm_free_block *prev_free_block;    /* 前一个块 */
         struct _zend_mm_free_block *next_free_block;    /* 后一个块 */
-     
+
         struct _zend_mm_free_block **parent;    /* 父结点 */
         struct _zend_mm_free_block *child[2];   /* 两个子结点*/
     } zend_mm_free_block;
-     
-     
-     
+
+
+
     struct _zend_mm_heap {
         int                 use_zend_alloc; /* 是否使用zend内存管理器 */
         void               *(*_malloc)(size_t); /* 内存分配函数*/
@@ -89,7 +95,7 @@ PHP内存管理器
         zend_mm_free_block *free_buckets[ZEND_MM_NUM_BUCKETS*2];    /* 小块内存数组，相当索引的角色 */
         zend_mm_free_block *large_free_buckets[ZEND_MM_NUM_BUCKETS];    /* 大块内存数组，相当索引的角色 */
         zend_mm_free_block *rest_buckets[2];    /* 剩余内存数组*/
-     
+
     };
 
 当初始化内存管理时，调用函数是zend_mm_startup。它会初始化storage层的分配方案， 初始化段大小，压缩边界值，并调用zend_mm_startup_ex()初始化堆层。 这里的分配方案就是图6.1所示的四种方案，它对应的环境变量名为：ZEND_MM_MEM_TYPE。 这里的初始化的段大小可以通过ZEND_MM_SEG_SIZE设置，如果没设置这个环境变量，程序中默认为256 * 1024。 这个值存储在_zend_mm_heap结构的block_size字段中，将来在维护的三个列表中都没有可用的内存中，会参考这个值的大小来申请内存的大小。
@@ -137,11 +143,11 @@ free_buckets列表使用free_bitmap标记是否该双向链表已经使用过时
 free_buckets列表的作用是存储小块内存，而与之对应的large_free_buckets列表的作用是存储大块的内存， 虽然large_free_buckets列表也类似于一个hash表，但是这个与前面的free_buckets列表一些区别。 它是一个集成了数组，树型结构和双向链表三种数据结构的混合体。 我们先看其数组结构，数组是一个hash映射，其hash函数为：
 
     #define ZEND_MM_LARGE_BUCKET_INDEX(S) zend_mm_high_bit(S)
-     
-     
+
+
     static inline unsigned int zend_mm_high_bit(size_t _size)
     {
-     
+
     ..//省略若干不同环境的实现
         unsigned int n = 0;
         while (_size != 0) {
@@ -177,12 +183,12 @@ large_free_buckets列表结构
 
     /* Heaps with user defined storage */
     typedef struct _zend_mm_storage zend_mm_storage;
-     
+
     typedef struct _zend_mm_segment {
         size_t    size;
         struct _zend_mm_segment *next_segment;
     } zend_mm_segment;
-     
+
     typedef struct _zend_mm_mem_handlers {
         const char *name;
         zend_mm_storage* (*init)(void *params);    //    初始化函数
@@ -192,7 +198,7 @@ large_free_buckets列表结构
         zend_mm_segment* (*_realloc)(zend_mm_storage *storage, zend_mm_segment *ptr, size_t size);    //    重新分配内存函数
         void (*_free)(zend_mm_storage *storage, zend_mm_segment *ptr);    //    释放内存函数
     } zend_mm_mem_handlers;
-     
+
     struct _zend_mm_storage {
         const zend_mm_mem_handlers *handlers;    //    处理函数集
         void *data;
@@ -208,16 +214,16 @@ large_free_buckets列表结构
 
     /* 使用mmap内存映射函数分配内存 写入时拷贝的私有映射，并且匿名映射，映射区不与任何文件关联。*/
     # define ZEND_MM_MEM_MMAP_ANON_DSC {"mmap_anon", zend_mm_mem_dummy_init, zend_mm_mem_dummy_dtor, zend_mm_mem_dummy_compact, zend_mm_mem_mmap_anon_alloc, zend_mm_mem_mmap_realloc, zend_mm_mem_mmap_free}
-     
+
     /* 使用mmap内存映射函数分配内存 写入时拷贝的私有映射，并且映射到/dev/zero。*/
     # define ZEND_MM_MEM_MMAP_ZERO_DSC {"mmap_zero", zend_mm_mem_mmap_zero_init, zend_mm_mem_mmap_zero_dtor, zend_mm_mem_dummy_compact, zend_mm_mem_mmap_zero_alloc, zend_mm_mem_mmap_realloc, zend_mm_mem_mmap_free}
-     
+
     /* 使用HeapAlloc分配内存 windows版本 关于这点，注释中写的是VirtualAlloc() to allocate memory，实际在程序中使用的是HeapAlloc*/
     # define ZEND_MM_MEM_WIN32_DSC {"win32", zend_mm_mem_win32_init, zend_mm_mem_win32_dtor, zend_mm_mem_win32_compact, zend_mm_mem_win32_alloc, zend_mm_mem_win32_realloc, zend_mm_mem_win32_free}
-     
+
     /* 使用malloc分配内存 默认为此种分配 如果有加ZEND_WIN32宏，则使用win32的分配方案*/
     # define ZEND_MM_MEM_MALLOC_DSC {"malloc", zend_mm_mem_dummy_init, zend_mm_mem_dummy_dtor, zend_mm_mem_dummy_compact, zend_mm_mem_malloc_alloc, zend_mm_mem_malloc_realloc, zend_mm_mem_malloc_free}
-     
+
     static const zend_mm_mem_handlers mem_handlers[] = {
     #ifdef HAVE_MEM_WIN32
         ZEND_MM_MEM_WIN32_DSC,
