@@ -118,12 +118,13 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  php-devel: /categories/php  || university
-  cpp-devel: /cpp-devel  || university
+  php-devel: /categories/php-devel || university
+  cpp-devel: /categories/cpp-devel  || university
   essay: /categories/essay  || university
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
+  php_internal: /categories/php-internal/  || university
   about: /about/ || user
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
