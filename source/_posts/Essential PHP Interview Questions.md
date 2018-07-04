@@ -1,3 +1,11 @@
+---
+title:  本文讲述14个经典的php面试题.
+tags: php-devel
+categories: php-devel
+date: 2018-03-01 20:07:02
+updated: 2018-03-01 20:07:02
+---
+
 本文讲述14个经典的php面试题.
 ## 问题一
 ### 问题描述
@@ -99,7 +107,7 @@
     bool(false)
     bool(true)
     bool(false)
-    
+
 对于语句"var_dump(0123 == 123)", 输出结果为"bool(false)".
 因为以0开头的数组在php解释器看来, 是八进制数字.
 八进制的"123"与十进制的"123"不相等.
@@ -152,12 +160,12 @@
 
 
 As a result, the call to $testArray = array_merge($testArray, $referenceTable['val2']) evaluates
-to $testArray = array_merge($testArray, 3) and, 
-since 3 is not of type array, this call to array_merge() returns NULL, 
-which in turn ends up setting $testArray equal to NULL. 
-Then, when we get to the next call to array_merge(), $testArray is now NULL 
+to $testArray = array_merge($testArray, 3) and,
+since 3 is not of type array, this call to array_merge() returns NULL,
+which in turn ends up setting $testArray equal to NULL.
+Then, when we get to the next call to array_merge(), $testArray is now NULL
 so array_merge() again returns NULL.
-(This also explains why the first warning complains about argument #2 
+(This also explains why the first warning complains about argument #2
 and the second warning complains about argument #1.)
 
 执行语句"\$testArray = array_merge(\$testArray, \$referenceTable['val2'])"时,
@@ -182,8 +190,8 @@ and the second warning complains about argument #1.)
 
 这样的输出结果如下:
 
-    array(2) { [0]=> int(1) [1]=> int(2) } 
-    array(3) { [0]=> int(1) [1]=> int(2) [2]=> int(3) } 
+    array(2) { [0]=> int(1) [1]=> int(2) }
+    array(3) { [0]=> int(1) [1]=> int(2) [2]=> int(3) }
     array(5) { [0]=> int(1) [1]=> int(2) [2]=> int(3) [3]=> int(4) [4]=> int(5) }
 
 
@@ -210,7 +218,7 @@ The issue here is that the = operator takes precedence over the and operator in 
     true and false;  // 结果是false, 但是这个结果与$x无关.
 
 为了使自己的表达式更加清晰, 适当添加括号是一个很好的习惯.
-例如, 形如上面的表达式"\$x = true and false"用"\$x = (true and false)"代替, 
+例如, 形如上面的表达式"\$x = true and false"用"\$x = (true and false)"代替,
 那么"\$x"就被设置为"false"了.
 
 
@@ -407,16 +415,3 @@ The only differences are as follows:
 对于'0xFF'字符, 第一个非数字字符是'x'.
 那么整个转化过程的结果为'0'.
 所以"(int)'0xFF'"的结果是0, 即'\$x'的值为0.
-
-
-
-
-
-
-
-
-
-
-
-
-

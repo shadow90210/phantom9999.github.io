@@ -1,3 +1,12 @@
+---
+title:  php面试指南
+tags: php-devel
+categories: php-devel
+date: 2018-03-01 20:07:03
+updated: 2018-03-01 20:07:03
+---
+
+
 Ubiquitous…that is definitely one word you could use to describe PHP in relation to the web. It really is everywhere. In terms of server-side programming languages, it is by far the most widely used, powering more than 80% of today’s websites (with the next runner up, ASP.NET, trailing way behind at a mere 17%).
 
 Why? What makes PHP so popular and widely-used? While there’s no single answer to this question, PHP’s ease of use is certainly a significant contributing factor. PHP newbies can get up-to-speed and build dynamic PHP-based content into their web sites with a minimum of programming expertise required.
@@ -20,7 +29,7 @@ Closures become useful when some piece of logic needs to be performed in a limit
 # The 2nd argument to array_walk is an anonymous function
 array_walk($array, function($dog) {
     echo $dog->bark();
-}); 
+});
 
 Although they themselves have no name associated with them, anonymous functions can be assigned to a variable or passed around as callbacks by higher order functions that require them. For example:
 
@@ -59,7 +68,7 @@ This ability to access these external variables within a closure becomes particu
 
 Closures have additional object oriented uses as well. PHP 5.4 brings new methods to the Closure class’ interface. Specifically, the new bind and bindTo methods can be used to bind to new objects for the closure to operate on, e.g.:
 
-Closure::bindTo($newthis, $newscope); 
+Closure::bindTo($newthis, $newscope);
 
 This method will actually duplicate the closure itself and bind its scope to that new object, so $this actually references $newthis in the object context. To help illustrate, let’s modify the $dogs_bark function to use $this and then bind it to a new Dog object:
 
@@ -91,12 +100,12 @@ class Dog {
         global $sounds;
         return $sounds->bark();
     }
-} 
+}
 
 This introduces a hidden dependency of the Dog class on the global $sounds object. While there may be cases where this would be justified (e.g., a system with one single well-defined set of sounds that is never modified), generally speaking, it would be much better to explicitly pass the relevant $sounds object to the Dog class’ constructor, which would then be stored and used within that instance of the class; e.g.:
 
 class Dog {
-    protected $sounds; 
+    protected $sounds;
     function __construct($sounds) {
         $this->sounds = $sounds;
     }
@@ -164,7 +173,7 @@ trait Movement {
 
 trait Speak {
     public function makeSound(){
-        echo $this->sound . PHP_EOL; 
+        echo $this->sound . PHP_EOL;
     }
 }
 
@@ -174,7 +183,7 @@ class Dog {
     use Movement, Speak;  // Dog now has these capabilities!
 
     protected $sound;
-    
+
     function __construct() {
         $this->sound = 'bark';
     }
@@ -202,7 +211,7 @@ article_name=PHP Hiring Guide&tag_line=You are hired!&action=Submit
 
 The body of the request can be accessed through the PHP’s input stream the same as any other file:
 
-$input = file_get_contents("php://input"); 
+$input = file_get_contents("php://input");
 
 Q: Name and define at least five superglobals that begin with $_. Describe their relationship to the $GLOBALS variable.
 
@@ -256,7 +265,7 @@ function __set($name, $value) {
 
 A caller can then simply set the whiskers property like so:
 
-$dog->whiskers = $hairs; 
+$dog->whiskers = $hairs;
 
 This statement automatically invokes the __set method, using 'whiskers' as its first argument and the right side of the assignment as the second argument.
 
@@ -290,7 +299,7 @@ public function __callStatic($method, $args) {
     if (!is_object(static::$whiskersService)) {
         static::$whiskersService = new Whiskers(__CLASS__);
     }
-    return static::$whiskersService->load(); 
+    return static::$whiskersService->load();
 }
 
 $hairs = Dog::whiskers();
@@ -458,4 +467,4 @@ PHP 5.4 was released in March 2012, introducing Traits, as well as the ability t
 PHP 5.5 was released in June 2013 and is the current release. This version adds support for generators (and their related yield and send keywords), as well as adding finally to the try/catch exception handling syntax. APC Cache is gone in favor of OpCache (based on the Zend Optimizer). PHP 5.5 also takes the array literal even further and supports syntax such as ['shih tzu', 'rottweiler'][1] (which returns “rottweiler”) as well as the handy notation of strings interpreted as arrays (e.g., '6, 5, 4'[0], which returns “6”).
 Wrap-up
 
-Finding PHP developers can be relatively easy, but finding stellar PHP developers is a formidable challenge. The questions presented in this guide can serve as useful tools in your overall recruiting toolbox to better identify those who have mastered the language. Finding such candidates is well worth the effort, as they will undoubtedly have a significant positive impact on your team’s productivity and results. 
+Finding PHP developers can be relatively easy, but finding stellar PHP developers is a formidable challenge. The questions presented in this guide can serve as useful tools in your overall recruiting toolbox to better identify those who have mastered the language. Finding such candidates is well worth the effort, as they will undoubtedly have a significant positive impact on your team’s productivity and results.

@@ -1,3 +1,11 @@
+---
+title:  Buggy PHP Code
+tags: php-devel
+categories: php-devel
+date: 2018-03-01 20:07:01
+updated: 2018-03-01 20:07:01
+---
+
 PHP makes it relatively easy to build a web-based system, which is much of the reason for its popularity. But its ease of use notwithstanding, PHP has evolved into quite a sophisticated language with many frameworks, nuances, and subtleties that can bite developers, leading to hours of hair-pulling debugging. This article highlights ten of the more common mistakes that PHP developers need to beware of.
 
 Common Mistake #1: Leaving dangling array references after foreach loops
@@ -206,11 +214,11 @@ All that said, it is important to note that the practice of returning a referenc
 class Config
 {
     private $values = [];
-    
+
     public function setValue($key, $value) {
         $this->values[$key] = $value;
     }
-    
+
     public function getValue($key) {
         return $this->values[$key];
     }
@@ -460,7 +468,7 @@ First, let’s come back to arrays and ArrayObject instances (which mimic arrays
 
 // PHP 5.0 or later:
 $array = [];
-var_dump(empty($array));        // outputs bool(true) 
+var_dump(empty($array));        // outputs bool(true)
 $array = new ArrayObject();
 var_dump(empty($array));        // outputs bool(false)
 // why don't these both produce the same output?
@@ -469,7 +477,7 @@ And to make matters even worse, the results would have been different prior to P
 
 // Prior to PHP 5.0:
 $array = [];
-var_dump(empty($array));        // outputs bool(false) 
+var_dump(empty($array));        // outputs bool(false)
 $array = new ArrayObject();
 var_dump(empty($array));        // outputs bool(false)
 
@@ -539,56 +547,3 @@ Wrap-up
 PHP’s ease of use can lull developers into a false sense of comfort, leaving themselves vulnerable to lengthy PHP debugging due to some of the nuances and idiosyncrasies of the language. This can result in PHP not working and problems such as those described herein.
 
 The PHP language has evolved significantly over the course of its 20 year history. Familiarizing oneself with its subtleties is a worthwhile endeavor, as it will help ensure that the software you produce is more scalable, robust, and maintainable.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

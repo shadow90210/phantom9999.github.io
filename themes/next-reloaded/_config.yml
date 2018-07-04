@@ -125,6 +125,7 @@ menu:
   categories: /categories/ || th
   archives: /archives/ || archive
   php-internal: /categories/php-internal/  || university
+  php-ext: /categories/php-ext/  || university
   about: /about/ || user
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap

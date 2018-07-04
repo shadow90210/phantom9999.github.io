@@ -19,6 +19,7 @@ menu:
   cpp-devel: c++开发
   php-devel: php开发
   php-internal: php内核解析收集
+  php-ext: php拓展开发收集
   essay: 随笔
 sidebar:
   overview: 站点概览
