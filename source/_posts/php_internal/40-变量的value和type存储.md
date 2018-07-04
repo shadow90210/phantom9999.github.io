@@ -1,7 +1,9 @@
 ---
 title: 40-变量的value和type存储
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:40
+updated: 2018-01-01 20:07:40
 ---
 
 # 40-变量的value和type存储

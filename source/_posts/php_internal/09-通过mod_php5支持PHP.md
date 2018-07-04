@@ -1,7 +1,9 @@
 ---
 title: 09-通过mod_php5支持PHP
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:09
+updated: 2018-01-01 20:07:09
 ---
 
 # 09-通过mod_php5支持PHP

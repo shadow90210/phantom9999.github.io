@@ -1,7 +1,9 @@
 ---
 title: 20-PHP中的哈希表
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:20
+updated: 2018-01-01 20:07:20
 ---
 
 # 20-PHP中的哈希表

@@ -1,7 +1,9 @@
 ---
 title: 44-Zend内存管理器
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:44
+updated: 2018-01-01 20:07:44
 ---
 
 # 44-Zend内存管理器

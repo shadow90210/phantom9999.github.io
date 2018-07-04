@@ -1,7 +1,9 @@
 ---
 title: 23-翻译一篇HashTables文章
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:23
+updated: 2018-01-01 20:07:23
 ---
 
 # 23-翻译一篇HashTables文章

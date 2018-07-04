@@ -1,7 +1,9 @@
 ---
 title: 86-中间代码opcode的执行
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:08:26
+updated: 2018-01-01 20:08:26
 ---
 
 # 86-中间代码opcode的执行

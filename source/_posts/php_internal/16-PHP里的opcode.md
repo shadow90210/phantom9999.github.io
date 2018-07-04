@@ -1,7 +1,9 @@
 ---
 title: 16-PHP里的opcode
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:16
+updated: 2018-01-01 20:07:16
 ---
 
 # 16-PHP里的opcode

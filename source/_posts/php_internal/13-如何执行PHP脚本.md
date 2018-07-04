@@ -1,7 +1,9 @@
 ---
 title: 13-如何执行PHP脚本
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:13
+updated: 2018-01-01 20:07:13
 ---
 
 # 13-如何执行PHP脚本

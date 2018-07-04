@@ -1,7 +1,9 @@
 ---
 title: 70-类的原型zend_class_entry
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:08:10
+updated: 2018-01-01 20:08:20
 ---
 
 # 70-类的原型zend_class_entry

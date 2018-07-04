@@ -1,7 +1,9 @@
 ---
 title: 62-形参return value
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:08:02
+updated: 2018-01-01 20:08:02
 ---
 
 # 62-形参return value

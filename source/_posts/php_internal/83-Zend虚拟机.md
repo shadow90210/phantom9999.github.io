@@ -1,7 +1,9 @@
 ---
 title: 83-Zend虚拟机
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:08:23
+updated: 2018-01-01 20:08:23
 ---
 
 # 83-Zend虚拟机

@@ -1,7 +1,9 @@
 ---
 title: 22-PHP哈希算法设计
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:22
+updated: 2018-01-01 20:07:22
 ---
 
 # 22-PHP哈希算法设计

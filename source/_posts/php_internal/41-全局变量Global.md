@@ -1,7 +1,9 @@
 ---
 title: 41-全局变量Global
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:41
+updated: 2018-01-01 20:07:41
 ---
 
 # 41-全局变量Global

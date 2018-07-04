@@ -1,7 +1,9 @@
 ---
 title: 06-Zend引擎
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:06
+updated: 2018-01-01 20:07:06
 ---
 
 # 06-Zend引擎

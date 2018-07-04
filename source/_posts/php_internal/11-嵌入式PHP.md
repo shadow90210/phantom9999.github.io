@@ -1,7 +1,9 @@
 ---
 title: 11-嵌入式PHP
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:11
+updated: 2018-01-01 20:07:11
 ---
 
 # 11-嵌入式PHP

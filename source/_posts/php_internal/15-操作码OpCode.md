@@ -1,7 +1,9 @@
 ---
 title: 15-操作码OpCode
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:15
+updated: 2018-01-01 20:07:15
 ---
 
 # 15-操作码OpCode

@@ -1,7 +1,9 @@
 ---
 title: 49-内存管理中的cache
 tags: php_internal
-categories: php
+categories: php_internal
+date: 2018-01-01 20:07:49
+updated: 2018-01-01 20:07:49
 ---
 
 # 49-内存管理中的cache
