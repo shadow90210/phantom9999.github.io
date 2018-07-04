@@ -2,7 +2,9 @@
 title:
   archive: 归档
   category: 分类
+  categories: 分类
   tag: 标签
+  tags: 标签
   schedule: 日程表
 menu:
   home: 首页

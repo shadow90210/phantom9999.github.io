@@ -124,7 +124,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
-  php_internal: /categories/php-internal/  || university
+  php-internal: /categories/php-internal/  || university
   about: /about/ || user
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
