@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: sitemap.xml
-Sitemap: baidusitemap.xml
+Sitemap: https://phantom9999.github.io/sitemap.xml
+Sitemap: https://phantom9999.github.io/baidusitemap.xml
