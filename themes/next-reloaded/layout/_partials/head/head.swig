@@ -4,6 +4,7 @@
 <meta name="theme-color" content="{{ theme.android_chrome_color }}">
 <meta name="baidu-site-verification" content="vgpRFHlTIC" />
 <meta name="google-site-verification" content="BnECCcP14gKaNCZHg-CJxMD4dRHmp6DlDMAfoXftVjU" />
+<meta name="msvalidate.01" content="FD9F235D89800A839E28F52E0F487AFA" />
 
 {% if theme.needmoreshare2.enable %}
   {% set needmoreshare2_css = url_for(theme.vendors._internal + '/needsharebutton/needsharebutton.css') %}
