@@ -159,6 +159,8 @@ image_minifier:
 flowchart:
   # raphael:   # optional, the source url of raphael.js
   # flowchart: # optional, the source url of flowchart.js
+  raphael: https://cdn.bootcss.com/raphael/2.2.7/raphael.min.js
+  flowchart: https://cdn.bootcss.com/flowchart/1.6.5/flowchart.min.js
   options: # options used for `drawSVG`
 
 abbrlink:
@@ -197,6 +199,6 @@ filter_optimize:
 offline:
   maximumFileSizeToCacheInBytes: 5242880
   staticFileGlobs:
-  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2,moc,json,xml}
   stripPrefix: public
   verbose: true
