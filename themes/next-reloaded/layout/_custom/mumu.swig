@@ -33,7 +33,7 @@
 	width: 130px;
 	height: 170px;
 	cursor: move;
-	background: url("/images/ds.png") no-repeat;
+	background: url("/images/spig5.png") no-repeat;
 }
 </style>
 

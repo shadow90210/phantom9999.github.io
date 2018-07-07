@@ -43,7 +43,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
 
 # Home page setting
@@ -187,6 +187,7 @@ filter_optimize:
     # bundle loaded js file into the one
     bundle: true
     excludes:
+      - js/tagcanvas.js
   # set the priority of this plugin,
   # lower means it will be executed first, default is 10
   priority: 12
