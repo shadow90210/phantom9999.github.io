@@ -2,6 +2,7 @@
 title: 06-Zend引擎
 tags: php_internal
 categories: php_internal
+abbrlink: 586857d2
 date: 2018-01-01 20:07:06
 updated: 2018-01-01 20:07:06
 ---

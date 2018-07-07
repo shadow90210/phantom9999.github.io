@@ -2,6 +2,7 @@
 title: 22-PHP哈希算法设计
 tags: php_internal
 categories: php_internal
+abbrlink: aa43efb9
 date: 2018-01-01 20:07:22
 updated: 2018-01-01 20:07:22
 ---

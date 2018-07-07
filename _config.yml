@@ -5,8 +5,8 @@
 # Site
 title: phantom9999的博客
 subtitle:
-description:
-keywords:
+description: cpp,php相关的个人博客
+keywords: 开发, php, cpp, c++, 研发, web
 author: phantom9999
 language: zh-CN
 timezone:
@@ -16,7 +16,8 @@ timezone:
 url: https://phantom9999.github.io/
 #url:
 root: /
-permalink: :year-:month-:day/:title.html
+#permalink: :year-:month-:day/:title.html
+permalink: posts/:abbrlink.html
 permalink_defaults:
 
 # Directory
@@ -121,7 +122,8 @@ live2d:
 search:
   path: search.xml
 
-all_minifier: true
+## 压缩{{
+all_minifier: false
 
 js_concator:
   enable: false
@@ -134,12 +136,12 @@ html_minifier:
   ignore_error: false
 
 css_minifier:
-  enable: true
+  enable: false
   exclude:
     - '*.min.css'
 
 js_minifier:
-  enable: true
+  enable: false
   mangle: true
   exclude:
     - '*.min.js'
@@ -152,7 +154,48 @@ image_minifier:
   pngquant: false
   progressive: false
 
+# 压缩}}
+
 flowchart:
   # raphael:   # optional, the source url of raphael.js
   # flowchart: # optional, the source url of flowchart.js
   options: # options used for `drawSVG`
+
+abbrlink:
+  alg: crc32  #support crc16(default) and crc32
+  rep: hex    #support dec(default) and hex
+
+filter_optimize:
+  enable: true
+  # remove static resource query string
+  #   - like `?v=1.0.0`
+  remove_query_string: true
+  # remove the surrounding comments in each of the bundled files
+  remove_comments: false
+  css:
+    enable: true
+    # bundle loaded css file into the one
+    bundle: true
+    # use a script block to load css elements dynamically
+    delivery: true
+    # make specific css content inline into the html page
+    #   - only support the full path
+    #   - default is ['css/main.css']
+    inlines:
+    excludes:
+  js:
+    # bundle loaded js file into the one
+    bundle: true
+    excludes:
+  # set the priority of this plugin,
+  # lower means it will be executed first, default is 10
+  priority: 12
+
+
+# offline config passed to sw-precache.
+offline:
+  maximumFileSizeToCacheInBytes: 5242880
+  staticFileGlobs:
+  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+  stripPrefix: public
+  verbose: true

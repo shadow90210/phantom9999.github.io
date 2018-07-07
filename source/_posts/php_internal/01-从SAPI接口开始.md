@@ -2,6 +2,7 @@
 title: 01-从SAPI接口开始
 tags: php_internal
 categories: php_internal
+abbrlink: 21c95273
 date: 2018-01-01 20:07:00
 updated: 2018-01-01 20:07:00
 ---

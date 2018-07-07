@@ -2,6 +2,7 @@
 title: 21-理解Zend里的哈希表
 tags: php_internal
 categories: php_internal
+abbrlink: fd0a7d4d
 date: 2018-01-01 20:07:21
 updated: 2018-01-01 20:07:21
 ---

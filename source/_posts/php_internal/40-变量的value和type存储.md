@@ -2,6 +2,7 @@
 title: 40-变量的value和type存储
 tags: php_internal
 categories: php_internal
+abbrlink: fab9b467
 date: 2018-01-01 20:07:40
 updated: 2018-01-01 20:07:40
 ---

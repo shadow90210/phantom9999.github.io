@@ -2,6 +2,7 @@
 title: 45-PHP的内存管理
 tags: php_internal
 categories: php_internal
+abbrlink: 524450fa
 date: 2018-01-01 20:07:45
 updated: 2018-01-01 20:07:45
 ---

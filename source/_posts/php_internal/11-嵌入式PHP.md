@@ -2,6 +2,7 @@
 title: 11-嵌入式PHP
 tags: php_internal
 categories: php_internal
+abbrlink: 5cd78f2
 date: 2018-01-01 20:07:11
 updated: 2018-01-01 20:07:11
 ---

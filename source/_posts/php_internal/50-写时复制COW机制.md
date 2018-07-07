@@ -2,6 +2,7 @@
 title: 50-写时复制COW机制
 tags: php_internal
 categories: php_internal
+abbrlink: dbbb6adc
 date: 2018-01-01 20:07:50
 updated: 2018-01-01 20:07:50
 ---

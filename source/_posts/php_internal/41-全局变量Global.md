@@ -2,6 +2,7 @@
 title: 41-全局变量Global
 tags: php_internal
 categories: php_internal
+abbrlink: f979a6f5
 date: 2018-01-01 20:07:41
 updated: 2018-01-01 20:07:41
 ---

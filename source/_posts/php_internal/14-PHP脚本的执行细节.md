@@ -2,6 +2,7 @@
 title: 14-PHP脚本的执行细节
 tags: php_internal
 categories: php_internal
+abbrlink: 1b30d6ec
 date: 2018-01-01 20:07:14
 updated: 2018-01-01 20:07:14
 ---

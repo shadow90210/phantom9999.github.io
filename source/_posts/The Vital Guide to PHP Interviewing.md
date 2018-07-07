@@ -1,7 +1,8 @@
 ---
-title:  php面试指南
+title: php面试指南
 tags: php-devel
 categories: php-devel
+abbrlink: 7a743d7a
 date: 2018-03-01 20:07:03
 updated: 2018-03-01 20:07:03
 ---

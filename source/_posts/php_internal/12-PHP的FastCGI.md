@@ -2,6 +2,7 @@
 title: 12-PHP的FastCGI
 tags: php_internal
 categories: php_internal
+abbrlink: cb63db30
 date: 2018-01-01 20:07:12
 updated: 2018-01-01 20:07:12
 ---

@@ -2,6 +2,7 @@
 title: 09-通过mod_php5支持PHP
 tags: php_internal
 categories: php_internal
+abbrlink: 3317d45a
 date: 2018-01-01 20:07:09
 updated: 2018-01-01 20:07:09
 ---

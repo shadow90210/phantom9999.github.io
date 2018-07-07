@@ -2,6 +2,7 @@
 title: 62-形参return value
 tags: php_internal
 categories: php_internal
+abbrlink: d538eee9
 date: 2018-01-01 20:08:02
 updated: 2018-01-01 20:08:02
 ---

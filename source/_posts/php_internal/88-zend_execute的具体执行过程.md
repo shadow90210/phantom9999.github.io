@@ -2,6 +2,7 @@
 title: 88-zend_execute的具体执行过程
 tags: php_internal
 categories: php_internal
+abbrlink: fb962590
 date: 2018-01-01 20:08:28
 updated: 2018-01-01 20:08:28
 ---

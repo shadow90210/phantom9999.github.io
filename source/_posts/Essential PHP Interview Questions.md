@@ -1,7 +1,8 @@
 ---
-title:  本文讲述14个经典的php面试题.
+title: 本文讲述14个经典的php面试题.
 tags: php-devel
 categories: php-devel
+abbrlink: 329776f3
 date: 2018-03-01 20:07:02
 updated: 2018-03-01 20:07:02
 ---

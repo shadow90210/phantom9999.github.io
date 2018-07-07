@@ -2,6 +2,7 @@
 title: 49-内存管理中的cache
 tags: php_internal
 categories: php_internal
+abbrlink: b0c710fd
 date: 2018-01-01 20:07:49
 updated: 2018-01-01 20:07:49
 ---

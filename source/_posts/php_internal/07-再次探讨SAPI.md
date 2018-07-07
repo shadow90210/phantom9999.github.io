@@ -2,6 +2,7 @@
 title: 07-再次探讨SAPI
 tags: php_internal
 categories: php_internal
+abbrlink: 772ca8bd
 date: 2018-01-01 20:07:07
 updated: 2018-01-01 20:07:07
 ---

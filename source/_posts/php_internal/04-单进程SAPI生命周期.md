@@ -2,6 +2,7 @@
 title: 04-单进程SAPI生命周期
 tags: php_internal
 categories: php_internal
+abbrlink: d2c293a1
 date: 2018-01-01 20:07:04
 updated: 2018-01-01 20:07:04
 ---

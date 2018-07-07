@@ -2,6 +2,7 @@
 title: 60-zend_parse_parameters函数
 tags: php_internal
 categories: php_internal
+abbrlink: 15fd986d
 date: 2018-01-01 20:08:00
 updated: 2018-01-01 20:08:00
 ---

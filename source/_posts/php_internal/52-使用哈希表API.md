@@ -2,6 +2,7 @@
 title: 52-使用哈希表API
 tags: php_internal
 categories: php_internal
+abbrlink: 472cce10
 date: 2018-01-01 20:07:52
 updated: 2018-01-01 20:07:52
 ---

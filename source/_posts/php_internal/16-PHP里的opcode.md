@@ -2,6 +2,7 @@
 title: 16-PHP里的opcode
 tags: php_internal
 categories: php_internal
+abbrlink: 335c4a7f
 date: 2018-01-01 20:07:16
 updated: 2018-01-01 20:07:16
 ---

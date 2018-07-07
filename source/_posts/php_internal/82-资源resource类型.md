@@ -2,6 +2,7 @@
 title: 82-资源resource类型
 tags: php_internal
 categories: php_internal
+abbrlink: 861f2c56
 date: 2018-01-01 20:08:22
 updated: 2018-01-01 20:08:22
 ---

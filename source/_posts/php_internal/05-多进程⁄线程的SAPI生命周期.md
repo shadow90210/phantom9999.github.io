@@ -2,6 +2,7 @@
 title: 05-多进程⁄线程的SAPI生命周期
 tags: php_internal
 categories: php_internal
+abbrlink: d22489dc
 date: 2018-01-01 20:07:05
 updated: 2018-01-01 20:07:05
 ---

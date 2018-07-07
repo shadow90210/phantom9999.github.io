@@ -2,6 +2,7 @@
 title: 23-翻译一篇HashTables文章
 tags: php_internal
 categories: php_internal
+abbrlink: 9ac2a355
 date: 2018-01-01 20:07:23
 updated: 2018-01-01 20:07:23
 ---

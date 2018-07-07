@@ -2,6 +2,7 @@
 title: 70-类的原型zend_class_entry
 tags: php_internal
 categories: php_internal
+abbrlink: 5a3f5944
 date: 2018-01-01 20:08:10
 updated: 2018-01-01 20:08:20
 ---

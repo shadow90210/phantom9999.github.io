@@ -2,6 +2,7 @@
 title: 13-如何执行PHP脚本
 tags: php_internal
 categories: php_internal
+abbrlink: ffdd5200
 date: 2018-01-01 20:07:13
 updated: 2018-01-01 20:07:13
 ---

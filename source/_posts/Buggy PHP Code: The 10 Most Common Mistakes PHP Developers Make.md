@@ -1,7 +1,8 @@
 ---
-title:  Buggy PHP Code
+title: Buggy PHP Code
 tags: php-devel
 categories: php-devel
+abbrlink: 62d10050
 date: 2018-03-01 20:07:01
 updated: 2018-03-01 20:07:01
 ---
