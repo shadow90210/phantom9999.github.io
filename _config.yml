@@ -136,12 +136,12 @@ html_minifier:
   ignore_error: false
 
 css_minifier:
-  enable: false
+  enable: true
   exclude:
     - '*.min.css'
 
 js_minifier:
-  enable: false
+  enable: true
   mangle: true
   exclude:
     - '*.min.js'
@@ -179,7 +179,7 @@ filter_optimize:
     # bundle loaded css file into the one
     bundle: true
     # use a script block to load css elements dynamically
-    delivery: true
+    delivery: false
     # make specific css content inline into the html page
     #   - only support the full path
     #   - default is ['css/main.css']
@@ -189,7 +189,6 @@ filter_optimize:
     # bundle loaded js file into the one
     bundle: true
     excludes:
-      - 'js/tagcanvas.js'
   # set the priority of this plugin,
   # lower means it will be executed first, default is 10
   priority: 12
