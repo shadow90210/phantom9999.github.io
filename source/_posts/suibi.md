@@ -29,11 +29,24 @@ hexo使用主题模板将md渲染成静态html页面. 最后, 用户将这些静
 
 # 主题安装
 
+建议主题:
+- next 简约好看
 
 
 # 插件安装
 
-
+推荐插件:
+- hexo-abbrlink 生成固定链接, 降低url长度
+- hexo-all-minifier 压缩html/css/js, js打包到一个文件的功能有问题.
+- hexo-deployer-git 自动化部署
+- hexo-filter-flowchart markdown支持流程图
+- hexo-filter-optimize 将js打包成一个文件, 将main.css内联到html中
+- hexo-filter-plantuml markdown支持uml
+- hexo-filter-sequence markdown支持时序图
+- hexo-generator-baidu-sitemap 生成百度的sitemap
+- hexo-generator-search 支持即时搜索
+- hexo-generator-sitemap 生成sitemap
+- hexo-offline 缓存支持
 
 
 
