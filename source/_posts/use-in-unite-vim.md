@@ -86,10 +86,31 @@ unite.vim集成的功能包括:
 
 
 # buffer功能介绍与配置
+vim中的buffer类似于ide中已经打开的文件, vim将已经打开的文件保存到buffer中, 方便用户去使用.
 unite.vim内置buffer功能, 使用<code>:Unite source</code>命令可以看到.
 unite.vim提供的buffer功能包括:
 - buffer
 - buffer_tab
+
+其中执行<code>:Unite buffer</code>命令后, 会在新的tab中显示buffer列表, 而执行<code>:Unite buffer_tab</code>后会在当前tab中显示buffer.
+unite为buffer选择提供了即时搜索的功能, 用户可以搜索关键词, 然后unite查找buffer对应的文件, 然后进行排序. unite查找的内容仅限于路径和文件名.
+
+vim中有类似功能的插件包括, MinBufExplorer和bufexporer插件.
+
+bufexporer插件使用简单, 它提供三个命令分别是<code>\be</code>(打开历史文件列表), <code>\bv</code>(水平创建一个tab显示buffer信息), <code>\bs</code>(垂直创建一个tab显示buffer信息).
+这个插件不需要配置, 加载即可使用. 比较麻烦的是, 快捷键比较逆天, 而且不支持buffer的搜索.
+
+MinBufExporer会开一个狭小的tab显示buffer列表信息.
+使用minBufExporer方面, minbufexporer跟bufexporer一样, 不需要配置, 可以直接使用.
+在minBufExporer使用<code>:bn</code>(下一个buffer), <code>:np</code>(上一个buf), <code>:b"num"</code>,
+<code>:MiniBufExporer</code>(打开tab, 并显示buffer信息), <code>:CMiniBufExporer</code>(关闭buffer的tab).
+
+与这两个插件相比, unite buffer显得无比强大好用.
+
+
+
+
+
 
 
 
