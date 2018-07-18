@@ -120,7 +120,7 @@ live2d:
 
 
 search:
-  path: search.xml
+  path: search.json
 
 ## 压缩{{
 all_minifier: true
