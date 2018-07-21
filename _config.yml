@@ -120,7 +120,7 @@ live2d:
 
 
 search:
-  path: search.json
+  path: search.xml
 
 ## 压缩{{
 all_minifier: true
@@ -179,7 +179,7 @@ filter_optimize:
     # bundle loaded css file into the one
     bundle: true
     # use a script block to load css elements dynamically
-    delivery: false
+    delivery: true
     # make specific css content inline into the html page
     #   - only support the full path
     #   - default is ['css/main.css']
