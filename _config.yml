@@ -99,23 +99,26 @@ baidusitemap:
   path: baidusitemap.xml
 
 
-#live2d:
-#  enable: true
-#  scriptFrom: local
-#  pluginRootPath: live2dw/
-#  pluginJsPath: lib/
-#  pluginModelPath: assets/
-#  model:
-#    use: live2d-widget-model-wanko
-#  display:
-#    position: right
-#    width: 30
-#    height: 60
-#  mobile:
-#    show: false
-
 live2d:
-  model: haruto
+  enable: true
+  scriptFrom: jsdelivr
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  log: true
+  model:
+    #use: live2d-widget-model-haruto
+    use: https://cdn.jsdelivr.net/npm/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json
+  display:
+    position: right
+    width: 100
+    height: 200
+  mobile:
+    show: true
+
+#live2d:
+  #  model: haruto
 
 
 

@@ -56,7 +56,6 @@
       </div>
     </main>
 
-  {{ live2d() }}
     <footer id="footer" class="footer">
       <div class="footer-inner">
         {{ partial('_partials/footer.swig', {}, {cache: theme.cache.enable}) }}
