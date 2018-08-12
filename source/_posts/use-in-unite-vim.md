@@ -108,16 +108,11 @@ MinBufExporer会开一个狭小的tab显示buffer列表信息.
 与这两个插件相比, unite buffer显得无比强大好用.
 
 
-
-
-
-
-
-
-
-
-
 # 文件查找功能介绍与配置
+
+
+
+
 
 # outline功能介绍与配置
 
