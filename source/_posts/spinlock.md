@@ -2,11 +2,16 @@
 title: spinlock
 categories: essay
 comments: false
+tags:
+  - spin lock
+  - 自旋锁
+  - cpp
+  - boost
+keywords: 'c++, boost, 自旋锁, spin lock'
+description: 本文介绍自旋锁的使用
+abbrlink: 4a74a9d
 date: 2018-08-05 18:43:55
 updated: 2018-08-05 18:43:55
-tags: [ spin lock, 自旋锁, cpp, boost ]
-keywords: c++, boost, 自旋锁, spin lock
-description: 本文介绍自旋锁的使用
 ---
 
 # 简介

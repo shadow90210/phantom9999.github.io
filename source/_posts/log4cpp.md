@@ -2,6 +2,7 @@
 title: 日志代码收敛(log4cpp/glog)
 categories: essay
 comments: false
+abbrlink: b270d3a9
 date: 2018-08-12 18:18:58
 updated: 2018-08-12 18:18:58
 tags:

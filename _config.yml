@@ -112,8 +112,8 @@ live2d:
     use: https://cdn.jsdelivr.net/npm/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json
   display:
     position: right
-    width: 50
-    height: 100
+    width: 100
+    height: 200
   mobile:
     show: true
 
