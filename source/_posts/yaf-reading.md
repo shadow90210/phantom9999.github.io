@@ -6,7 +6,7 @@ tags:
   - yaf
   - php
 keywords: 'php, yaf, 源码阅读'
-description: 本文介绍yaf的源码解读
+description:
 abbrlink: c1026c5e
 date: 2018-07-07 19:33:31
 updated: 2018-07-07 19:33:31
