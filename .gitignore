@@ -4,3 +4,4 @@ public/
 *.swp
 
 .deploy_git/
+!public/gaokao.html
