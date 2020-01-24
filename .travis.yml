@@ -21,6 +21,7 @@ install:
 script:
 - hexo clean
 - hexo g
+- cp gaokao.html public/
 
 after_success:
 - hexo deploy
