@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>高考赋分</title>
+</head>
+<body>
+<div class="container container-fluid container-lg">
+    <div class="row">
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">总人数</span>
+            </div>
+            <input type="text" class="form-control" placeholder="人数" id="total">
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" id="submit">计算</button>
+        </div>
+    </div>
+    <div class="row" style="height: 20px"></div>
+    <div class="row">
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">语文</span>
+            </div>
+            <input type="text" class="form-control" placeholder="分数" id="main1">
+        </div>
+
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">数学</span>
+            </div>
+            <input type="text" class="form-control" placeholder="分数" id="main2">
+        </div>
+
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">英语</span>
+            </div>
+            <input type="text" class="form-control" placeholder="分数" id="main3">
+        </div>
+    </div>
+    <div class="row" style="height: 20px"></div>
+    <div class="row">
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">物理</span>
+            </div>
+            <input type="text" class="form-control" placeholder="排名" id="sub1">
+        </div>
+
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">化学</span>
+            </div>
+            <input type="text" class="form-control" placeholder="排名" id="sub2">
+        </div>
+
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">生物</span>
+            </div>
+            <input type="text" class="form-control" placeholder="排名" id="sub3">
+        </div>
+    </div>
+    <div class="row" style="height: 20px"></div>
+    <div class="row">
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">政治</span>
+            </div>
+            <input type="text" class="form-control" placeholder="排名" id="sub4">
+        </div>
+
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">历史</span>
+            </div>
+            <input type="text" class="form-control" placeholder="排名" id="sub5">
+        </div>
+
+        <div class="input-group col-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">地理</span>
+            </div>
+            <input type="text" class="form-control" placeholder="排名" id="sub6">
+        </div>
+    </div>
+    <div class="row" style="height: 20px"></div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">总分</th>
+                <th scope="col">语数外总分</th>
+                <th scope="col">科目一</th>
+                <th scope="col">科目二</th>
+                <th scope="col">科目三</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th id="total00"></th>
+                <td id="main00"></td>
+                <td id="result00"></td>
+                <td id="result01"></td>
+                <td id="result02"></td>
+            </tr>
+            <tr>
+                <th id="total10"></th>
+                <td id="main10"></td>
+                <td id="result10"></td>
+                <td id="result11"></td>
+                <td id="result12"></td>
+            </tr>
+            <tr>
+                <th id="total20"></th>
+                <td id="main20"></td>
+                <td id="result20"></td>
+                <td id="result21"></td>
+                <td id="result22"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+    class Subject {
+        constructor(course, pos) {
+            this.course = course;
+            this.pos = pos;
+        }
+    }
+
+    $(document).ready(() => {
+        const mainMap = new Map([
+            ["main1", "语文"],
+            ["main2", "数学"],
+            ["main3", "英语"],
+        ]);
+        const subMap = new Map([
+            ["sub1", "物理"],
+            ["sub2", "化学"],
+            ["sub3", "生物"],
+            ["sub4", "政治"],
+            ["sub5", "历史"],
+            ["sub6", "地理"],
+        ]);
+        const scoreMap = new Map([
+            [1, 100],
+            [3, 97],
+            [6, 94],
+            [10, 91],
+            [15, 88],
+            [21, 85],
+            [28, 82],
+            [36, 79],
+            [43, 76],
+            [50, 73],
+            [57, 70],
+            [64, 67],
+            [71, 64],
+            [78, 61],
+            [84, 58],
+            [89, 55],
+            [93, 52],
+            [96, 49],
+            [98, 46],
+            [99, 43],
+            [100, 40],
+        ]);
+
+
+        $("#submit").click(() => {
+            const total = parseInt($("#total").val());
+            if (isNaN(total) || total < 0) {
+                alert("人数不对");
+            }
+            const mainList = [];
+            for (const [key, value] of mainMap.entries()) {
+                const score = parseFloat($(`#${key}`).val());
+                if (isNaN(score) || score > 150 || score < 0) {
+                    alert(`${value} 分数填写有误`);
+                    return;
+                }
+                mainList.push(score);
+            }
+            let subList = [];
+            for (const [key, value] of subMap.entries()) {
+                const pos = parseInt($(`#${key}`).val());
+                if (isNaN(pos) || pos > total || pos <= 0) {
+                    alert(`${value} 排名填写有误`);
+                    return;
+                }
+                subList.push(new Subject(value, pos));
+            }
+            const length = subList.length - 1;
+            for (let i=0; i<length;++i) {
+                for (let j=i+1; j<length;++j) {
+                    const item1 = subList[i];
+                    const item2 = subList[j];
+                    if (item1.pos > item2.pos) {
+                        subList[i] = item2;
+                        subList[j] = item1;
+                    }
+                }
+            }
+            let mainSum = 0;
+            for (const item of mainList) {
+                mainSum += item;
+            }
+            for (let i=0; i<3; ++i) {
+                // 行
+                let subSum = 0;
+                $(`#main${i}0`).text(mainSum);
+                for (let j=0; j<3; ++j) {
+                    // 列
+                    const index = i+j;
+                    const subject = subList[index];
+                    const pos = parseInt(subject.pos * 100 / total);
+                    let score = 0;
+                    for (const [per, perScore] of scoreMap.entries()) {
+                        if (per >= pos) {
+                            score = perScore;
+                            break;
+                        }
+                    }
+                    subSum += score;
+                    $(`#result${i}${j}`).text(`${subject.course}:${score}`);
+                }
+                $(`#total${i}0`).text(subSum + mainSum);
+            }
+
+        });
+    });
+</script>
+</body>
+</html>
