@@ -10,10 +10,7 @@
 <div class="container container-fluid container-lg">
     <div class="row">
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">总人数</span>
-            </div>
-            <input type="text" class="form-control" placeholder="人数" id="total">
+            <input type="text" class="form-control" placeholder="总人数" id="total">
         </div>
         <div class="col-4">
             <button type="button" class="btn btn-primary" id="submit">计算</button>
@@ -22,70 +19,43 @@
     <div class="row" style="height: 20px"></div>
     <div class="row">
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">语文</span>
-            </div>
-            <input type="text" class="form-control" placeholder="分数" id="main1">
+            <input type="text" class="form-control" placeholder="语文分数" id="main1">
         </div>
 
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">数学</span>
-            </div>
-            <input type="text" class="form-control" placeholder="分数" id="main2">
+            <input type="text" class="form-control" placeholder="数学分数" id="main2">
         </div>
 
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">英语</span>
-            </div>
-            <input type="text" class="form-control" placeholder="分数" id="main3">
+            <input type="text" class="form-control" placeholder="英语分数" id="main3">
         </div>
     </div>
     <div class="row" style="height: 20px"></div>
     <div class="row">
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">物理</span>
-            </div>
-            <input type="text" class="form-control" placeholder="排名" id="sub1">
+            <input type="text" class="form-control" placeholder="物理排名" id="sub1">
         </div>
 
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">化学</span>
-            </div>
-            <input type="text" class="form-control" placeholder="排名" id="sub2">
+            <input type="text" class="form-control" placeholder="化学排名" id="sub2">
         </div>
 
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">生物</span>
-            </div>
-            <input type="text" class="form-control" placeholder="排名" id="sub3">
+            <input type="text" class="form-control" placeholder="生物排名" id="sub3">
         </div>
     </div>
     <div class="row" style="height: 20px"></div>
     <div class="row">
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">政治</span>
-            </div>
-            <input type="text" class="form-control" placeholder="排名" id="sub4">
+            <input type="text" class="form-control" placeholder="政治排名" id="sub4">
         </div>
 
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">历史</span>
-            </div>
-            <input type="text" class="form-control" placeholder="排名" id="sub5">
+            <input type="text" class="form-control" placeholder="历史排名" id="sub5">
         </div>
 
         <div class="input-group col-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text">地理</span>
-            </div>
-            <input type="text" class="form-control" placeholder="排名" id="sub6">
+            <input type="text" class="form-control" placeholder="地理排名" id="sub6">
         </div>
     </div>
     <div class="row" style="height: 20px"></div>
@@ -181,6 +151,7 @@
             const total = parseInt($("#total").val());
             if (isNaN(total) || total < 0) {
                 alert("人数不对");
+                return;
             }
             const mainList = [];
             for (const [key, value] of mainMap.entries()) {
