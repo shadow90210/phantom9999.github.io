@@ -97,6 +97,11 @@ private:
 ```
 从server类的声明中可以看到，全局的io_context对象存储在io_context_变量中，并在run函数和构造函数中进行使用。
 
+# 性能比较
+上面讲了两种方案的实现，这一节做一个简单的性能测试。
+asio的example提供的两个server实现了基本的http server，本次用于测试的客户端使用brpc的http客户端，进行测试的serer开启六个个线程。这是本次性能测试使用的[代码库](https://github.com/phantom9999/asio_benchmarks)。
+测试结果显示，这两种方案的峰值qps都在2w左右，性能差不多。
+这两个server都会进行文件读写操作，一定程度上影响了测试结果，且本文使用的代码并没有进行优化，这也可能无法正确区分两种方案的性能差异。
 
 
 
